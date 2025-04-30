@@ -1,0 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'RedditSans', 'Inter', 'Helvetica Neue', Helvetica, 'PingFang SC',
+  'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ 
+}
+
+#app {
+  height: inherit;
+}

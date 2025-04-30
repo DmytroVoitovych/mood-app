@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { LogoIco } from '~/assets/iconImport.ts'
+import { LogoIco } from "~/assets/iconImport";
 </script>
 
 <template>
@@ -10,6 +10,4 @@ import { LogoIco } from '~/assets/iconImport.ts'
   </el-page-header>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
