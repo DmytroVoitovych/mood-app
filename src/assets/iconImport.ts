@@ -1,5 +1,4 @@
-import LogoIco from './images/logo.svg'
+import LogoIco from "./images/logo.svg";
+import AvatarPlaceholder from "./images/avatar-placeholder.svg?url";
 
-export {
-  LogoIco,
-}
+export { LogoIco, AvatarPlaceholder };

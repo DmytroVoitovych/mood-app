@@ -1,7 +1,6 @@
 import type { UserModule } from "./types";
 import { ViteSSG } from "vite-ssg";
 import "~/styles/index.scss";
-import "~/styles/element/index.scss";
 
 // import ElementPlus from "element-plus";
 // import all element css, uncommented next line

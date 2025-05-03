@@ -10,6 +10,7 @@ declare module 'vue' {
     AuthForm: typeof import('./components/shared/AuthForm.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     ContainerBase: typeof import('./components/shared/ContainerBase.vue')['default']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
     ElContainer: typeof import('element-plus/es')['ElContainer']
@@ -27,11 +28,15 @@ declare module 'vue' {
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    InputAuthBlock: typeof import('./components/authcomponents/InputAuthBlock.vue')['default']
     Logos: typeof import('./components/Logos.vue')['default']
+    MainButton: typeof import('./components/shared/MainButton.vue')['default']
     MainLogo: typeof import('./components/shared/MainLogo.vue')['default']
     MessageBoxDemo: typeof import('./components/MessageBoxDemo.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UploadComponent: typeof import('./components/authcomponents/UploadComponent.vue')['default']
   }
 }

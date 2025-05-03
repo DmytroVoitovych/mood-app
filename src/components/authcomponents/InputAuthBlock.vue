@@ -1,0 +1,80 @@
+<template>
+  <div class="inputBlock">
+    <el-form-item
+      prop="email"
+      label="Email address"
+      class="text-preset-6-regular"
+      :rules="[
+        {
+          required: true,
+          message: 'Please input email address',
+          trigger: 'blur',
+        },
+        {
+          type: 'email',
+          message: 'Invalid email format.',
+          trigger: ['blur'],
+        },
+      ]"
+    >
+      <el-input placeholder="name@mail.com" size="small" v-model="email" />
+    </el-form-item>
+    <el-form-item label="Password" prop="pass" class="text-preset-6-regular" size="large">
+      <el-input v-model="pass" type="password" autocomplete="off" size="small" />
+    </el-form-item>
+  </div>
+</template>
+
+<script lang="ts" setup>
+const email = defineModel<string>("email");
+const pass = defineModel<string>("pass");
+</script>
+
+<style lang="scss" scoped>
+.el-form-item.is-error :deep(.el-input__wrapper.is-focus) {
+  outline: 2px solid var(--el-color-danger);
+  box-shadow: 0 0 0 1px var(--el-color-danger) inset;
+  outline-offset: 3px;
+}
+
+.el-form-item {
+  --el-text-color-regular: var(--neutral-900);
+  --el-form-label-font-size: 18px;
+
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.el-input {
+  font-size: 18px;
+
+  :deep(.el-input__wrapper) {
+    padding: 12px 16px;
+
+    &.is-focus {
+      box-shadow: 0 0 0 1px var(--neutral-300) inset;
+      outline: 2px solid var(--blue-600);
+      outline-offset: 3px;
+    }
+  }
+
+  :deep(.el-input__wrapper:not(.is-focus)) {
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  :deep(.el-input__inner:not(:focus)) {
+    @media (hover: hover) {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+</style>
