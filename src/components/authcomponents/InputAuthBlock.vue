@@ -4,28 +4,38 @@
       prop="email"
       label="Email address"
       class="text-preset-6-regular"
-      :rules="[
-        {
-          required: true,
-          message: 'Please input email address',
-          trigger: 'blur',
-        },
-        {
-          type: 'email',
-          message: 'Invalid email format.',
-          trigger: ['blur'],
-        },
-      ]"
+      :rules="formEmailRules"
     >
-      <el-input placeholder="name@mail.com" size="small" v-model="email" />
+      <el-input
+        placeholder="name@mail.com"
+        size="small"
+        v-model="email"
+        required
+        autocomplete="on"
+      />
     </el-form-item>
-    <el-form-item label="Password" prop="pass" class="text-preset-6-regular" size="large">
-      <el-input v-model="pass" type="password" autocomplete="off" size="small" />
+    <el-form-item
+      label="Password"
+      prop="pass"
+      class="text-preset-6-regular"
+      size="large"
+      :rules="formPasswordRules"
+    >
+      <el-input
+        v-model="pass"
+        type="password"
+        autocomplete="off"
+        size="small"
+        show-password
+        required
+      />
     </el-form-item>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { formEmailRules, formPasswordRules } from "./helpers";
+
 const email = defineModel<string>("email");
 const pass = defineModel<string>("pass");
 </script>
@@ -45,6 +55,22 @@ const pass = defineModel<string>("pass");
 
   &:last-child {
     margin-bottom: 0;
+  }
+
+  :deep(.el-form-item__error) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-image: url("~/assets/images/info-circle.svg");
+    }
   }
 }
 

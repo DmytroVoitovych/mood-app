@@ -1,5 +1,5 @@
 <template>
-  <AuthForm next-link="/auth/SignIn"> </AuthForm>
+  <AuthForm next-link="/auth/SignIn" />
 </template>
 
 <script setup lang="ts">
