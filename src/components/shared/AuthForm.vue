@@ -3,11 +3,12 @@
     <div class="authBlock">
       <MainLogo />
       <el-form
-        :model="nextLink ? authForm : uploadForm"
+        :model="currentForm"
         label-position="top"
         label-width="100%"
         hide-required-asterisk
         class="auth onboarding"
+        ref="formRef"
       >
         <div class="formTextBlock">
           <h1 class="text-preset-3 authTitle"><slot name="formTitle"> Create an account </slot></h1>
@@ -25,7 +26,13 @@
           v-model:name="uploadForm.name"
           v-model:fileList="uploadForm.fileList"
         />
-        <el-button type="primary" size="large" class="text-preset-5"
+        <el-button
+          type="primary"
+          size="large"
+          class="text-preset-5"
+          @click="$emit('authFormEmit', currentForm)"
+          :loading="loading"
+          :disabled="loading"
           ><slot name="btnContent">Sign Up</slot></el-button
         >
         <div class="authPageSwitch" v-if="nextLink">
@@ -42,13 +49,16 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { computed, reactive, ref } from "vue";
 import MainLogo from "./MainLogo.vue";
 import InputAuthBlock from "../authcomponents/InputAuthBlock.vue";
 import UploadComponent from "../authcomponents/UploadComponent.vue";
-import { UploadUserFile } from "element-plus";
+import { FormInstance, UploadUserFile } from "element-plus";
+import { useGlobalLoadingState } from "~/composables/globalLoadingState";
 
-defineProps<{ nextLink?: "/auth/SignIn" | "/auth/SignUp" }>();
+const props = defineProps<{ nextLink?: "/auth/SignIn" | "/auth/SignUp" }>();
+const formRef = ref<FormInstance>();
+const { loading } = useGlobalLoadingState();
 
 const authForm = reactive({
   pass: "",
@@ -59,6 +69,8 @@ const uploadForm = reactive<{ name: string; fileList: UploadUserFile[] }>({
   name: "",
   fileList: [],
 });
+
+const currentForm = computed(() => (props.nextLink ? authForm : uploadForm));
 </script>
 
 <style lang="scss" scoped>

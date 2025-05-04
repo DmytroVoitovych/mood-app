@@ -1,32 +1,18 @@
 import type { UserModule } from "./types";
 import { ViteSSG } from "vite-ssg";
 import "~/styles/index.scss";
-
-// import ElementPlus from "element-plus";
-// import all element css, uncommented next line
-// import "element-plus/dist/index.css";
-
-// or use cdn, uncomment cdn link in `index.html`
-
 import { routes } from "vue-router/auto-routes";
 import App from "./App.vue";
 
 // If you want to use ElMessage, import it.
 import "element-plus/theme-chalk/src/message.scss";
 import "element-plus/theme-chalk/src/message-box.scss";
+import "element-plus/theme-chalk/src/notification.scss";
 
-// if you do not need ssg:
-// import { createApp } from "vue";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./firebase/firebaseConfig";
+initializeApp(firebaseConfig);
 
-// const app = createApp(App);
-// app.use(createRouter({
-//   history: createWebHistory(),
-//   routes,
-// }))
-// // app.use(ElementPlus);
-// app.mount("#app");
-
-// https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
   {

@@ -8,4 +8,7 @@
 
 <script setup lang="ts">
 import AuthForm from "~/components/shared/AuthForm.vue";
+// const test = (e) => {
+//   console.log(e, "test");
+// };
 </script>

@@ -28,3 +28,7 @@ body {
 .el-button--primary {
   --el-color-primary-light-3: var(--blue-700);
 }
+
+.el-notification {
+  font-family: inherit;
+}
