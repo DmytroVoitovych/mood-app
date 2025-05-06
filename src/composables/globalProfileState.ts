@@ -1,8 +1,9 @@
-import { createGlobalState } from "@vueuse/core";
-import { shallowRef } from "vue";
+import { createGlobalState, useStorage } from "@vueuse/core";
 
-export const useGlobalProfileState = createGlobalState(() => {
-  const profileName = shallowRef("Anonimous");
-  const avatar = shallowRef("~/assets/images/avatar-placeholder.svg");
-  return { profileName, avatar };
-});
+export const useGlobalProfileState = createGlobalState(() =>
+  useStorage("profile-data", {
+    profileName: "Anonimous",
+    avatar: "~/assets/images/avatar-placeholder.svg",
+    isAboard: false,
+  }),
+);

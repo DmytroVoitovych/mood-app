@@ -23,7 +23,7 @@ type OnboardingData = {
 };
 const router = useRouter();
 
-const { profileName, avatar } = useGlobalProfileState();
+const state = useGlobalProfileState();
 const { loading } = useGlobalLoadingState();
 
 const auth = getAuth();
@@ -35,11 +35,12 @@ const onBoardUser = async ({ name, fileList }: OnboardingData) => {
 
   updateProfile(user.value!, {
     displayName: name,
-    photoURL: avatarUrl || "",
+    photoURL: avatarUrl || AvatarPlaceholder,
   })
     .then(() => {
-      profileName.value = name;
-      avatar.value = avatarUrl || AvatarPlaceholder;
+      state.value.profileName = name;
+      state.value.avatar = avatarUrl || AvatarPlaceholder;
+      state.value.isAboard = true;
     })
     .catch((error) => console.log(error))
     .finally(() => {

@@ -22,6 +22,9 @@
           <div class="el-upload__tip text-preset-7">Max 250KB, PNG or JPEG</div>
         </template>
         <template #trigger><el-button class="text-preset-6">Upload</el-button></template>
+        <span v-show="errMessage" class="is-error text-preset-9"
+          ><LogoCircle width="12" height="12" />{{ errMessage }}</span
+        >
       </el-upload>
     </div>
   </div>
@@ -29,7 +32,6 @@
 
 <script lang="ts" setup>
 import {
-  ElMessage,
   genFileId,
   UploadInstance,
   UploadProps,
@@ -37,11 +39,15 @@ import {
   UploadUserFile,
 } from "element-plus";
 import { ref } from "vue";
-import { AvatarPlaceholder } from "~/assets/iconImport";
+import { AvatarPlaceholder, LogoCircle } from "~/assets/iconImport";
+
+const SIZE_ERR_MESSAGE = "Avatar picture size can not exceed 250kb!";
+const FORMAT_ERR_MESSAGE = "Avatar picture must be JPG or PNG format!";
 
 const name = defineModel<string>("name");
 const fileList = defineModel<UploadUserFile[]>("fileList");
 const imageUrl = ref("");
+const errMessage = ref("");
 
 const upload = ref<UploadInstance>();
 
@@ -53,27 +59,30 @@ const handleExceed: UploadProps["onExceed"] = (files) => {
 };
 
 const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
-  //переделать под макет
-
   const isAcceptableFormats = ["image/jpg", "image/jpeg", "image/png"].includes(rawFile.type);
+
   if (!isAcceptableFormats) {
-    ElMessage.error("Avatar picture must be JPG or PNG format!");
+    errMessage.value = FORMAT_ERR_MESSAGE;
     return false;
   } else if (rawFile.size / 1024 > 250) {
-    ElMessage.error("Avatar picture size can not exceed 250kb!");
+    errMessage.value = SIZE_ERR_MESSAGE;
     return false;
   }
+  errMessage.value = "";
   return true;
 };
 
 const handleAvatarChange: UploadProps["onChange"] = (uploadFile) => {
   if (!beforeAvatarUpload(uploadFile.raw!)) return;
   imageUrl.value = URL.createObjectURL(uploadFile.raw!);
-  // console.log(fileList);
 };
 </script>
 
 <style lang="scss" scoped>
+.inputBlock {
+  position: relative;
+}
+
 .el-form-item.is-error :deep(.el-input__wrapper.is-focus) {
   outline: 2px solid var(--el-color-danger);
   box-shadow: 0 0 0 1px var(--el-color-danger) inset;
@@ -138,6 +147,18 @@ const handleAvatarChange: UploadProps["onChange"] = (uploadFile) => {
   display: grid;
   place-items: start;
   grid-template-rows: repeat(3, 0fr) 0;
+
+  .is-error {
+    position: absolute;
+    top: calc(100% + 8px);
+    color: var(--el-color-danger);
+    display: flex;
+    gap: 6px;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
 
   .el-upload__tip {
     margin-top: 6px;
