@@ -25,8 +25,16 @@ body {
   box-shadow: 0 8px 16px 0 rgba(32, 37, 41, 0.08);
 }
 
+.el-button {
+  &:focus-visible {
+    outline-width: 2px !important;
+    outline-offset: 3px !important;
+  }
+}
+
 .el-button--primary {
   --el-color-primary-light-3: var(--blue-700);
+  --el-color-primary-light-5: var(--blue-600);
 }
 
 .el-notification {

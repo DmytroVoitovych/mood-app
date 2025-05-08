@@ -20,7 +20,7 @@
           <el-button class="text-preset-7" text @click="$emit('showModal')"
             ><template #icon><SettingIco /></template>Settings</el-button
           >
-          <el-button class="text-preset-7" text
+          <el-button class="text-preset-7" text @click.once="logOut"
             ><template #icon><LogoutIco /></template>Logout</el-button
           >
         </div>
@@ -31,6 +31,7 @@
 
 <script lang="ts" setup>
 import { useMediaQuery } from "@vueuse/core";
+import { getAuth, signOut } from "firebase/auth";
 import { computed } from "vue";
 import { ArrowIco, LogoutIco, SettingIco } from "~/assets/iconImport";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
@@ -39,6 +40,8 @@ const isMediumScreen = useMediaQuery("(min-width: 530px)");
 const state = useGlobalProfileState();
 
 const popoverWidth = computed(() => (isMediumScreen.value ? "200px" : "100%"));
+
+const logOut = () => signOut(getAuth()).catch((e) => console.log(e));
 </script>
 
 <style lang="scss" scoped>

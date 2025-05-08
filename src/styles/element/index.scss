@@ -3,6 +3,7 @@
   // Main button paddings
   $button-padding-vertical: ("large": 13px, "default": 9px, "small": 6px),
   $button-padding-horizontal: ("large": 33px, "default": 17px, "small": 12px),
+  $button: ("outline-color": #{var(--blue-600)}),
   $popover: (
     "title-font-size": 18px,
     "border-radius": 8px,

@@ -13,6 +13,13 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebase/firebaseConfig";
 initializeApp(firebaseConfig);
 
+for (const route of routes) {
+  if (route.name === "/" || route.name === "/auth/OnBoarding") {
+    route.meta ??= {};
+    route.meta.requiresAuth = true;
+  }
+}
+
 export const createApp = ViteSSG(
   App,
   {
