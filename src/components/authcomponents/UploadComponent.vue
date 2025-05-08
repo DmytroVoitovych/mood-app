@@ -4,7 +4,7 @@
       <el-input v-model="name" placeholder="Jane Appleseed" />
     </el-form-item>
     <div class="uploadBlock">
-      <el-avatar :size="64" :src="imageUrl ? imageUrl : AvatarPlaceholder" />
+      <el-avatar :size="64" :src="imageUrl" />
       <el-upload
         ref="upload"
         v-model:file-list="fileList"
@@ -16,6 +16,7 @@
         :on-exceed="handleExceed"
         accept="image/png,image/jpeg,image/jpg"
         class="uploadWrapper"
+        thumbnail="true"
       >
         <el-text class="text-preset-6-regular">Upload Image</el-text>
         <template #tip>
@@ -40,13 +41,16 @@ import {
 } from "element-plus";
 import { ref } from "vue";
 import { AvatarPlaceholder, LogoCircle } from "~/assets/iconImport";
+import { useGlobalProfileState } from "~/composables/globalProfileState";
+
+const state = useGlobalProfileState();
 
 const SIZE_ERR_MESSAGE = "Avatar picture size can not exceed 250kb!";
 const FORMAT_ERR_MESSAGE = "Avatar picture must be JPG or PNG format!";
 
 const name = defineModel<string>("name");
 const fileList = defineModel<UploadUserFile[]>("fileList");
-const imageUrl = ref("");
+const imageUrl = ref(state.value.avatar || AvatarPlaceholder);
 const errMessage = ref("");
 
 const upload = ref<UploadInstance>();
@@ -168,5 +172,9 @@ const handleAvatarChange: UploadProps["onChange"] = (uploadFile) => {
   :deep(.el-upload--picture) {
     grid-row: 3/4;
   }
+}
+
+.el-avatar {
+  --el-avatar-bg-color: var(--neutral-0);
 }
 </style>

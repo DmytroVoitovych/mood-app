@@ -32,3 +32,10 @@ body {
 .el-notification {
   font-family: inherit;
 }
+
+.el-popover {
+  &__title {
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+  }
+}

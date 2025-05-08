@@ -5,5 +5,6 @@ export const useGlobalProfileState = createGlobalState(() =>
     profileName: "Anonimous",
     avatar: "~/assets/images/avatar-placeholder.svg",
     isAboard: false,
+    email: "",
   }),
 );

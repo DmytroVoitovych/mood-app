@@ -24,14 +24,13 @@ export default defineConfig({
   },
 
   plugins: [
-    Vue(),
-    svgLoader({ defaultImport: "component" }),
     // https://github.com/posva/unplugin-vue-router
     VueRouter({
       extensions: [".vue", ".md"],
       dts: "src/typed-router.d.ts",
     }),
-
+    Vue(),
+    svgLoader({ defaultImport: "component" }),
     Components({
       // allow auto load markdown components under `./src/components/`
       extensions: ["vue", "md"],

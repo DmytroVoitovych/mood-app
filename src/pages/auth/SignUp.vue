@@ -1,5 +1,7 @@
 <template>
-  <AuthForm next-link="/auth/SignIn" @auth-form-emit="registerUser" />
+  <ContainerBase>
+    <AuthForm next-link="/auth/SignIn" @auth-form-emit="registerUser"
+  /></ContainerBase>
 </template>
 
 <script setup lang="ts">

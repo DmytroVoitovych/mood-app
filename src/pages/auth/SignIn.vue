@@ -1,11 +1,13 @@
 <template>
-  <AuthForm next-link="/auth/SignUp" @auth-form-emit="loginUser">
-    <template #formTitle>Welcome back!</template>
-    <template #formDescription> Log in to continue tracking your mood and sleep.</template>
-    <template #btnContent>Log In</template>
-    <template #formQuestion>Haven't got an account?</template>
-    <template #authTextLink>Sign Up.</template>
-  </AuthForm>
+  <ContainerBase>
+    <AuthForm next-link="/auth/SignUp" @auth-form-emit="loginUser">
+      <template #formTitle>Welcome back!</template>
+      <template #formDescription> Log in to continue tracking your mood and sleep.</template>
+      <template #btnContent>Log In</template>
+      <template #formQuestion>Haven't got an account?</template>
+      <template #authTextLink>Sign Up.</template>
+    </AuthForm>
+  </ContainerBase>
 </template>
 
 <script setup lang="ts">

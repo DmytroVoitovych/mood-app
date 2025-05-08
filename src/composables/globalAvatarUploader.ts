@@ -8,6 +8,8 @@ export type OnboardingData = {
 const getRawImgFile = (fileList: UploadUserFile[]) => fileList[0].raw;
 
 export const getUserAvaterUrl = async ({ name, fileList }: OnboardingData) => {
+  if (!fileList.length) return "";
+
   const rawFile = getRawImgFile(fileList);
 
   const formData = new FormData();

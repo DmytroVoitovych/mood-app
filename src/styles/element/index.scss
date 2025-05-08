@@ -2,5 +2,12 @@
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   // Main button paddings
   $button-padding-vertical: ("large": 13px, "default": 9px, "small": 6px),
-  $button-padding-horizontal: ("large": 33px, "default": 17px, "small": 12px)
+  $button-padding-horizontal: ("large": 33px, "default": 17px, "small": 12px),
+  $popover: (
+    "title-font-size": 18px,
+    "border-radius": 8px,
+    "padding": 12px 16px,
+    "title-text-color": #{var(--neutral-900)},
+    "line-height": 1.2
+  )
 );
