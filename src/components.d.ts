@@ -36,6 +36,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElText: typeof import('element-plus/es')['ElText']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    GreetingsBlock: typeof import('./components/GreetingsBlock.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     InputAuthBlock: typeof import('./components/authcomponents/InputAuthBlock.vue')['default']
     Logos: typeof import('./components/Logos.vue')['default']

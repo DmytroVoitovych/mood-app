@@ -2,7 +2,13 @@
 <template>
   <el-container direction="vertical">
     <BaseHeader />
-    <main>Home</main>
+    <main>
+      <section class="hero">
+        <GreetingsBlock />
+      </section>
+      <section class="statistic"></section>
+      <section class="diagram"></section>
+    </main>
   </el-container>
 </template>
 
@@ -31,5 +37,9 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+section:not(.hero) {
+  padding: 20px 16px;
 }
 </style>
