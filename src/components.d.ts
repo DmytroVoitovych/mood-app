@@ -46,6 +46,8 @@ declare module 'vue' {
     ProfilePopover: typeof import('./components/ProfilePopover.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StatisticBlock: typeof import('./components/StatisticBlock.vue')['default']
+    TrackingBlock: typeof import('./components/shared/TrackingBlock.vue')['default']
     UploadComponent: typeof import('./components/authcomponents/UploadComponent.vue')['default']
   }
 }

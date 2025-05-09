@@ -5,7 +5,9 @@
         >Hello, {{ state.profileName }}!</el-text
       >
       <h1 class="grettingsBlock__title" :class="titleClass">How are you feeling today?</h1>
-      <el-text class="currentDate text-preset-6"> {{ CURRENT_DATE }}</el-text>
+      <el-text class="currentDate text-preset-6">
+        <time :datetime="CURRENT_DATE">{{ CURRENT_DATE }}</time></el-text
+      >
     </div>
     <el-button class="text-preset-5" type="primary" size="large">Log today's mood</el-button>
   </div>

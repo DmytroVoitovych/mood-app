@@ -6,8 +6,12 @@
       <section class="hero">
         <GreetingsBlock />
       </section>
-      <section class="statistic"></section>
-      <section class="diagram"></section>
+      <div class="sectionWrapper">
+        <section class="statistic">
+          <StatisticBlock />
+        </section>
+        <section class="diagram"></section>
+      </div>
     </main>
   </el-container>
 </template>
@@ -37,6 +41,30 @@
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+.hero {
+  margin-bottom: 48px;
+}
+
+.hero:has(section) {
+  margin-bottom: 64px;
+}
+
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include mq(large) {
+    flex-direction: row;
+  }
+}
+
+.statistic {
+  border-radius: 16px;
+  border: 1px solid var(--blue-100);
+  background-color: var(--neutral-0);
 }
 
 section:not(.hero) {
