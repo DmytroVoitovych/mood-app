@@ -9,7 +9,14 @@
         <time :datetime="CURRENT_DATE">{{ CURRENT_DATE }}</time></el-text
       >
     </div>
-    <el-button class="text-preset-5" type="primary" size="large">Log today's mood</el-button>
+    <el-button
+      class="text-preset-5"
+      type="primary"
+      size="large"
+      @click="centerDialogVisible = !centerDialogVisible"
+      >Log today's mood</el-button
+    >
+    <MoodLogModal v-model="centerDialogVisible" />
   </div>
 </template>
 
@@ -17,11 +24,14 @@
 import { useMediaQuery } from "@vueuse/core";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 import { getCurrentDate } from "./helpers";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import MoodLogModal from "./MoodLogModal.vue";
 
 const CURRENT_DATE = getCurrentDate();
 const isMediumScreen = useMediaQuery("(min-width: 530px)");
 const state = useGlobalProfileState();
+
+const centerDialogVisible = ref(false);
 
 const titleClass = computed(() => {
   return isMediumScreen.value ? "text-preset-1" : "text-preset-1-mobile";

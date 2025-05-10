@@ -44,6 +44,7 @@ declare module 'vue' {
     MainButton: typeof import('./components/shared/MainButton.vue')['default']
     MainLogo: typeof import('./components/shared/MainLogo.vue')['default']
     MessageBoxDemo: typeof import('./components/MessageBoxDemo.vue')['default']
+    MoodLogModal: typeof import('./components/MoodLogModal.vue')['default']
     ProfilePopover: typeof import('./components/ProfilePopover.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
