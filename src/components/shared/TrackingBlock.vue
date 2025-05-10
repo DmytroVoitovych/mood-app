@@ -15,7 +15,7 @@
   background-color: var(--blue-100);
   background-image: url("~/assets/images/bg-pattern-averages.svg");
   background-repeat: no-repeat;
-  background-position: 370%;
+  background-position: calc(100% + 182px);
 
   @include mq(medium) {
     padding: 40px 20px;

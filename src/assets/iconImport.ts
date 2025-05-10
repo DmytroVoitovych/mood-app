@@ -4,5 +4,6 @@ import LogoCircle from "./images/info-circle.svg";
 import ArrowIco from "./images/icon-dropdown-arrow.svg";
 import SettingIco from "./images/icon-settings.svg";
 import LogoutIco from "./images/icon-logout.svg";
+import SleepIco from "./images/icon-sleep.svg";
 
-export { LogoIco, AvatarPlaceholder, LogoCircle, ArrowIco, SettingIco, LogoutIco };
+export { LogoIco, AvatarPlaceholder, LogoCircle, ArrowIco, SettingIco, LogoutIco, SleepIco };

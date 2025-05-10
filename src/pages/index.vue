@@ -10,7 +10,9 @@
         <section class="statistic">
           <StatisticBlock />
         </section>
-        <section class="diagram"></section>
+        <section class="diagram">
+          <DiagramBlock />
+        </section>
       </div>
     </main>
   </el-container>
@@ -61,13 +63,17 @@
   }
 }
 
-.statistic {
+:where(.statistic, .diagram) {
   border-radius: 16px;
   border: 1px solid var(--blue-100);
   background-color: var(--neutral-0);
 }
 
-section:not(.hero) {
+.diagram {
+  flex-grow: 1;
+}
+
+section:not(:where(.hero, .el-container)) {
   padding: 20px 16px;
 }
 </style>

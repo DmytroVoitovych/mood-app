@@ -10,6 +10,7 @@ declare module 'vue' {
     AuthForm: typeof import('./components/shared/AuthForm.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     ContainerBase: typeof import('./components/shared/ContainerBase.vue')['default']
+    DiagramBlock: typeof import('./components/DiagramBlock.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
