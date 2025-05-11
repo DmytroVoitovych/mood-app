@@ -5,9 +5,3 @@ export const useGlobalLoadingState = createGlobalState(() => {
   const loading = shallowRef(false);
   return { loading };
 });
-
-export const useGlobalProfileState = createGlobalState(() => {
-  const name = shallowRef("Anonimous");
-  const avatar = shallowRef("~/assets/images/avatar-placeholder.svg");
-  return { name, avatar };
-});

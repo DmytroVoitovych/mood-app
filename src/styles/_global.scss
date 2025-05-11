@@ -1,3 +1,5 @@
+@use "./mixins" as *;
+
 body {
   font-family:
     "RedditSans", "Inter", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
@@ -42,5 +44,26 @@ body {
   &__title {
     line-height: 1.2 !important;
     margin-bottom: 2px !important;
+  }
+}
+
+.el-overlay {
+  --el-overlay-color-lighter: color-mix(in srgb, var(--neutral-900) 70%, transparent);
+
+  .el-dialog {
+    --el-dialog-border-radius: 16px;
+    --el-dialog-padding-primary: 32px 20px;
+    --el-dialog-width: calc(100% - 40px);
+
+    max-width: 600px;
+    background-image: var(--light-gradient);
+
+    @include mq(medium) {
+      --el-dialog-padding-primary: 48px 40px;
+    }
+
+    .el-icon.el-dialog__close {
+      --el-color-info: var(--neutral-300);
+    }
   }
 }

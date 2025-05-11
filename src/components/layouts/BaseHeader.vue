@@ -47,10 +47,6 @@ header {
   align-items: center;
   position: relative;
 
-  :deep(.el-overlay) {
-    --el-overlay-color-lighter: color-mix(in srgb, var(--neutral-900) 70%, transparent);
-  }
-
   :deep(.el-dialog) {
     --el-dialog-border-radius: 16px;
     --el-dialog-padding-primary: 40px 20px;
