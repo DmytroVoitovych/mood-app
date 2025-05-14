@@ -1,5 +1,5 @@
 <template>
-  <el-checkbox-group v-model="moodState.feelings">
+  <el-checkbox-group v-model="moodState.feelings" class="text-preset-5">
     <el-checkbox
       class="text-preset-6-regular"
       v-for="mood of moodsList"

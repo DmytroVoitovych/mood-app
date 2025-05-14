@@ -116,6 +116,7 @@ const currentForm = computed(() => (props.nextLink ? authForm : uploadForm));
   }
 
   &.setting {
+    background-color: transparent;
     .el-button {
       --el-button-size: 60px;
       margin-bottom: 0;

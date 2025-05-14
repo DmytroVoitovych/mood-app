@@ -52,6 +52,7 @@ declare module 'vue' {
     MoodForm: typeof import('./components/MoodForm.vue')['default']
     MoodLogModal: typeof import('./components/MoodLogModal.vue')['default']
     MoodRadioGroup: typeof import('./components/shared/MoodRadioGroup.vue')['default']
+    MoodTextArea: typeof import('./components/shared/MoodTextArea.vue')['default']
     ProfilePopover: typeof import('./components/ProfilePopover.vue')['default']
     RadioGroupBtn: typeof import('./components/shared/RadioGroupBtn.vue')['default']
     RadioList: typeof import('./components/shared/RadioList.vue')['default']

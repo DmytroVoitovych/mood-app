@@ -61,14 +61,25 @@ const rules = reactive<FormRules<MoodForm>>({
       },
     },
   ],
-  journalEntry: [{ message: "Please write about your day before continuing.", trigger: "change" }],
+  journalEntry: [
+    {
+      message: "Please write a few words about your day before continuing.",
+      validator: (r, val: string) => {
+        const isValid = !!val.trim().length;
+        errInfo.value = isValid ? "" : (r.message as string);
+        return isValid;
+      },
+    },
+    { message: "Please write a few words about your day before continuing.", trigger: "blur" },
+  ],
   sleepHours: [
     {
       required: true,
-      message: "Please select a mood before continuing.",
+      message: "Please select a sleep hour before continuing.",
       validator: (r, val) => {
-        console.log(r);
-        return val !== "";
+        const isValid = val !== "";
+        errInfo.value = isValid ? "" : (r.message as string);
+        return isValid;
       },
       trigger: "change",
     },
@@ -77,7 +88,10 @@ const rules = reactive<FormRules<MoodForm>>({
 
 const currentEmitHandler = computed(() => {
   return props.step === 4
-    ? () => emit("submitForm")
+    ? () =>
+        formRef.value?.validate((valid) => {
+          if (valid) emit("submitForm");
+        })
     : () =>
         formRef.value?.validate((valid) => {
           if (valid) emit("nextStep");

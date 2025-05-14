@@ -12,9 +12,14 @@
       </ul>
     </template>
     <div class="moodLogModal__content">
-      <h3 class="moodLogModal__content--question" :class="questionClass">
-        {{ STATIC_MOOD_DATA.questions[dialogStapStore.step - 1] }}
-      </h3>
+      <div class="moodLogModal__content__textBlock">
+        <h3 class="moodLogModal__content--question" :class="questionClass">
+          {{ STATIC_MOOD_DATA.questions[dialogStapStore.step - 1] }}
+        </h3>
+        <el-text v-if="dialogStapStore.step === 2" class="text-preset-6">
+          Select up to three tags:</el-text
+        >
+      </div>
       <MoodForm
         :step="dialogStapStore.step"
         @next-step="dialogStapStore.step++"
@@ -39,6 +44,7 @@ import { DialogInstance } from "element-plus";
 import { computed, useTemplateRef } from "vue";
 import MoodRadioGroup from "./shared/MoodRadioGroup.vue";
 import MoodCheckboxGroup from "./shared/MoodCheckboxGroup.vue";
+import MoodTextArea from "./shared/MoodTextArea.vue";
 
 const STATIC_MOOD_DATA = {
   questions: [
@@ -47,8 +53,9 @@ const STATIC_MOOD_DATA = {
     "Write about your day...",
     "How many hours did you sleep last night?",
   ],
-  components: [MoodRadioGroup, MoodCheckboxGroup, , MoodRadioGroup],
-};
+  components: [MoodRadioGroup, MoodCheckboxGroup, MoodTextArea, MoodRadioGroup],
+} as const;
+
 const dialogRef = useTemplateRef<DialogInstance>("dialogRef");
 
 const centerDialogVisible = defineModel<boolean>("centerDialogVisible");
@@ -80,7 +87,11 @@ const afterSubmit = () => {
 }
 
 .moodLogModal__content {
-  &--question {
+  &__textBlock {
+    .el-text {
+      --el-text-color: var(--neutral-600);
+    }
+
     color: var(--neutral-900);
     margin-bottom: 24px;
 
