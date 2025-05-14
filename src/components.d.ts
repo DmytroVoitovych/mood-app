@@ -51,6 +51,7 @@ declare module 'vue' {
     MoodRadioGroup: typeof import('./components/shared/MoodRadioGroup.vue')['default']
     ProfilePopover: typeof import('./components/ProfilePopover.vue')['default']
     RadioGroupBtn: typeof import('./components/shared/RadioGroupBtn.vue')['default']
+    RadioList: typeof import('./components/shared/RadioList.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StatisticBlock: typeof import('./components/StatisticBlock.vue')['default']

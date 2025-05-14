@@ -1,10 +1,10 @@
 import { createGlobalState, useSessionStorage } from "@vueuse/core";
 
-type MoodForm = {
-  mood: string;
+export type MoodForm = {
+  mood: number | string;
   feelings: string[];
   journalEntry: string;
-  sleepHours: string;
+  sleepHours: number | string;
 };
 
 export const useGlobalMoodState = createGlobalState(() =>

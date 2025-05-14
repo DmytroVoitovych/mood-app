@@ -46,9 +46,10 @@ const STATIC_MOOD_DATA = {
     "Write about your day...",
     "How many hours did you sleep last night?",
   ],
-  components: [MoodRadioGroup],
+  components: [MoodRadioGroup, , , MoodRadioGroup],
 };
 const dialogRef = useTemplateRef<DialogInstance>("dialogRef");
+
 const centerDialogVisible = defineModel<boolean>("centerDialogVisible");
 const dialogStapStore = useSessionStorage("dialogStep", {
   step: 1,
