@@ -38,6 +38,7 @@ import { useMediaQuery, useSessionStorage } from "@vueuse/core";
 import { DialogInstance } from "element-plus";
 import { computed, useTemplateRef } from "vue";
 import MoodRadioGroup from "./shared/MoodRadioGroup.vue";
+import MoodCheckboxGroup from "./shared/MoodCheckboxGroup.vue";
 
 const STATIC_MOOD_DATA = {
   questions: [
@@ -46,7 +47,7 @@ const STATIC_MOOD_DATA = {
     "Write about your day...",
     "How many hours did you sleep last night?",
   ],
-  components: [MoodRadioGroup, , , MoodRadioGroup],
+  components: [MoodRadioGroup, MoodCheckboxGroup, , MoodRadioGroup],
 };
 const dialogRef = useTemplateRef<DialogInstance>("dialogRef");
 

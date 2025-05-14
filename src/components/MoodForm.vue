@@ -8,7 +8,12 @@
         >
       </template>
     </el-form-item>
-    <el-button class="text-preset-4" native-type="submit" type="primary" size="large"
+    <el-button
+      class="text-preset-4"
+      native-type="submit"
+      type="primary"
+      size="large"
+      :disabled="!!errInfo"
       ><slot name="moodBtn"></slot
     ></el-button>
   </el-form>
@@ -17,7 +22,7 @@
 <script lang="ts" setup>
 import { FormInstance, FormRules } from "element-plus";
 import { ref } from "vue";
-import { computed, onMounted, reactive, useTemplateRef } from "vue";
+import { computed, reactive, useTemplateRef } from "vue";
 import { LogoCircle } from "~/assets/iconImport";
 import { MoodForm, useGlobalMoodState } from "~/composables/globalMoodState";
 
@@ -39,13 +44,23 @@ const rules = reactive<FormRules<MoodForm>>({
       required: true,
       message: "Please select a mood before continuing.",
       validator: (r, val) => {
-        errInfo.value = r.message as string;
-        return val !== "";
+        const isValid = val !== "";
+        errInfo.value = isValid ? "" : (r.message as string);
+        return isValid;
       },
       trigger: "change",
     },
   ],
-  feelings: [{ message: "Please select a mood before continuing.", trigger: "change" }],
+  feelings: [
+    {
+      message: "You can only select a maximum of 3 tags and minimum 1.",
+      validator: (r, val) => {
+        const isValid = val.length <= 3 && val.length > 0;
+        errInfo.value = isValid ? "" : (r.message as string);
+        return isValid;
+      },
+    },
+  ],
   journalEntry: [{ message: "Please write about your day before continuing.", trigger: "change" }],
   sleepHours: [
     {
@@ -68,8 +83,6 @@ const currentEmitHandler = computed(() => {
           if (valid) emit("nextStep");
         });
 });
-
-onMounted(() => console.log(formRef.value?.fields));
 </script>
 
 <style lang="scss" scoped>
