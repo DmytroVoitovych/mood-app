@@ -1,5 +1,11 @@
 <template>
-  <el-dialog v-model="centerDialogVisible" :show-close="false" ref="dialogRef">
+  <el-dialog
+    class="scale"
+    v-model="centerDialogVisible"
+    :show-close="false"
+    ref="dialogRef"
+    @closed="afterCloseAnimation"
+  >
     <template #header>
       <h2 class="moodLogModal__title" :class="titleClass">Log your mood</h2>
       <ul class="stepsList">
@@ -41,7 +47,7 @@
 <script lang="ts" setup>
 import { useMediaQuery, useSessionStorage } from "@vueuse/core";
 import { DialogInstance } from "element-plus";
-import { computed, useTemplateRef } from "vue";
+import { computed, ref, useTemplateRef } from "vue";
 import MoodRadioGroup from "./shared/MoodRadioGroup.vue";
 import MoodCheckboxGroup from "./shared/MoodCheckboxGroup.vue";
 import MoodTextArea from "./shared/MoodTextArea.vue";
@@ -56,6 +62,7 @@ const STATIC_MOOD_DATA = {
   components: [MoodRadioGroup, MoodCheckboxGroup, MoodTextArea, MoodRadioGroup],
 } as const;
 
+const isSubmited = ref(false);
 const dialogRef = useTemplateRef<DialogInstance>("dialogRef");
 
 const centerDialogVisible = defineModel<boolean>("centerDialogVisible");
@@ -71,9 +78,16 @@ const questionClass = computed(() => {
   return isMediumScreen.value ? "text-preset-3" : "text-preset-3-mobile";
 });
 
+const afterCloseAnimation = () => {
+  if (isSubmited.value) {
+    dialogStapStore.value.step = 1;
+    isSubmited.value = false;
+  }
+};
+
 const afterSubmit = () => {
+  isSubmited.value = true;
   dialogRef.value?.handleClose();
-  dialogStapStore.value.step = 1;
 };
 </script>
 <style lang="scss" scoped>

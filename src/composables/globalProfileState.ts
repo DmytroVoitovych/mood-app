@@ -1,10 +1,22 @@
-import { createGlobalState, useStorage } from "@vueuse/core";
+import { createGlobalState, createSharedComposable, useStorage } from "@vueuse/core";
+import { AvatarPlaceholder } from "~/assets/iconImport";
 
-export const useGlobalProfileState = createGlobalState(() =>
-  useStorage("profile-data", {
-    profileName: "Anonimous",
-    avatar: "~/assets/images/avatar-placeholder.svg",
-    isAboard: false,
-    email: "",
-  }),
+export const initialData = {
+  profileName: "Anonimous",
+  avatar: AvatarPlaceholder,
+  isAboard: false,
+  email: "",
+  logData: {},
+};
+
+export const useGlobalProfileState = createSharedComposable(
+  createGlobalState(() =>
+    useStorage("profile-data", {
+      profileName: "Anonimous",
+      avatar: AvatarPlaceholder,
+      isAboard: false,
+      email: "",
+      logData: {},
+    }),
+  ),
 );

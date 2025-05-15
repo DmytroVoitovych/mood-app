@@ -16,6 +16,10 @@ body {
   background-attachment: fixed;
   background-size: cover;
   flex-grow: 1;
+
+  &:has(> .baseAuthContainer) {
+    align-content: center;
+  }
 }
 
 .el-form:where(.auth, .onboarding) {

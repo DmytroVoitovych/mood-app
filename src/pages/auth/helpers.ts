@@ -1,4 +1,6 @@
 import { ElNotification } from "element-plus";
+import { UserCredential } from "firebase/auth";
+import { useGlobalProfileState } from "~/composables/globalProfileState";
 
 const registrationFirebaseCode: { email: string; weak: string; exists: string } = {
   email: "auth/invalid-email",
@@ -83,4 +85,15 @@ const authErrorHandler = (errorCode: string) => {
   }
 };
 
-export { registrationErrorHandler, authErrorHandler };
+const profileCheckAndUpdate = (data: UserCredential, isAboard: boolean) => {
+  const state = useGlobalProfileState();
+
+  if (data.user.email !== state.value.email) {
+    state.value.avatar = data.user.photoURL || "";
+    state.value.email = data.user.email || "";
+    state.value.profileName = data.user.displayName || "";
+    state.value.isAboard = isAboard;
+  }
+};
+
+export { registrationErrorHandler, authErrorHandler, profileCheckAndUpdate };

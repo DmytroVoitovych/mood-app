@@ -37,11 +37,18 @@ const authGuard = (
   }
 
   if (!to.meta.requiresAuth && isLoggedIn && state.value.isAboard) {
+    console.log("state.value.isAboard", state.value.isAboard, to.meta.requiresAuth);
     next({ name: "/" });
     return;
   }
 
-  if (!to.meta.requiresAuth && isLoggedIn && !state.value.isAboard) {
+  if (
+    !to.meta.requiresAuth &&
+    isLoggedIn &&
+    !state.value.isAboard &&
+    to.name !== "/auth/OnBoarding"
+  ) {
+    console.log("state.value.isAboard", state.value.isAboard, to.meta.requiresAuth);
     next({ name: "/auth/OnBoarding" });
     return;
   }
@@ -53,7 +60,7 @@ onMounted(() => {
   auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     console.log(user, "state was changed");
-    if (user) router.push({ name: "/" });
+    if (user && state.value.isAboard) router.push({ name: "/" });
     router.beforeEach(authGuard);
     if (!user) {
       router.push({ name: "/auth/SignIn" });

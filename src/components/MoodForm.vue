@@ -14,17 +14,24 @@
       type="primary"
       size="large"
       :disabled="!!errInfo"
+      :loading="loading"
       ><slot name="moodBtn"></slot
     ></el-button>
   </el-form>
 </template>
 
 <script lang="ts" setup>
-import { FormInstance, FormRules } from "element-plus";
-import { ref } from "vue";
-import { computed, reactive, useTemplateRef } from "vue";
+import { FormInstance } from "element-plus";
+import { computed, useTemplateRef } from "vue";
 import { LogoCircle } from "~/assets/iconImport";
 import { MoodForm, useGlobalMoodState } from "~/composables/globalMoodState";
+import { useLogRules } from "~/composables/handleLogRules";
+import { useDataBaseByFirebase } from "~/firebase/useFirebaseHelperFunctions";
+import { getCurrentDate } from "./helpers";
+import { useGlobalLoadingState } from "~/composables/globalLoadingState";
+import { useGlobalProfileState } from "~/composables/globalProfileState";
+
+const { addData } = useDataBaseByFirebase();
 
 const emit = defineEmits<{
   nextStep: [];
@@ -32,70 +39,51 @@ const emit = defineEmits<{
 }>();
 const props = defineProps<{ step: number }>();
 
+const { errInfo, rules } = useLogRules();
 const moodState = useGlobalMoodState();
+const { loading } = useGlobalLoadingState();
+const profileState = useGlobalProfileState();
 const keyListFromMoodState = Object.keys(moodState.value) as Array<keyof MoodForm>;
 
-const errInfo = ref("");
-
 const formRef = useTemplateRef<FormInstance>("formRef");
-const rules = reactive<FormRules<MoodForm>>({
-  mood: [
-    {
-      required: true,
-      message: "Please select a mood before continuing.",
-      validator: (r, val) => {
-        const isValid = val !== "";
-        errInfo.value = isValid ? "" : (r.message as string);
-        return isValid;
-      },
-      trigger: "change",
-    },
-  ],
-  feelings: [
-    {
-      message: "You can only select a maximum of 3 tags and minimum 1.",
-      validator: (r, val) => {
-        const isValid = val.length <= 3 && val.length > 0;
-        errInfo.value = isValid ? "" : (r.message as string);
-        return isValid;
-      },
-    },
-  ],
-  journalEntry: [
-    {
-      message: "Please write a few words about your day before continuing.",
-      validator: (r, val: string) => {
-        const isValid = !!val.trim().length;
-        errInfo.value = isValid ? "" : (r.message as string);
-        return isValid;
-      },
-    },
-    { message: "Please write a few words about your day before continuing.", trigger: "blur" },
-  ],
-  sleepHours: [
-    {
-      required: true,
-      message: "Please select a sleep hour before continuing.",
-      validator: (r, val) => {
-        const isValid = val !== "";
-        errInfo.value = isValid ? "" : (r.message as string);
-        return isValid;
-      },
-      trigger: "change",
-    },
-  ],
-});
+
+const resetMoodState = () => {
+  moodState.value = {
+    mood: "",
+    feelings: [],
+    journalEntry: "",
+    sleepHours: "",
+  };
+};
+
+const goToNextStep = () =>
+  formRef.value?.validate((valid) => {
+    if (valid) emit("nextStep");
+    console.log("test");
+  });
+
+const submitForm = () => {
+  formRef.value?.validate(async (valid) => {
+    if (valid) {
+      const date = getCurrentDate();
+      loading.value = true;
+      console.log("submitForm", moodState.value);
+      await addData({ [date]: moodState.value }, () => {
+        console.log(profileState.value.logData);
+        profileState.value.logData = {
+          ...profileState.value.logData,
+          [date]: moodState.value,
+        };
+        emit("submitForm");
+        formRef.value?.resetFields();
+        resetMoodState();
+      });
+    }
+  });
+};
 
 const currentEmitHandler = computed(() => {
-  return props.step === 4
-    ? () =>
-        formRef.value?.validate((valid) => {
-          if (valid) emit("submitForm");
-        })
-    : () =>
-        formRef.value?.validate((valid) => {
-          if (valid) emit("nextStep");
-        });
+  return props.step === 4 ? submitForm : goToNextStep;
 });
 </script>
 

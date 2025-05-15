@@ -14,13 +14,14 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import AuthForm from "~/components/shared/AuthForm.vue";
 import { useGlobalLoadingState } from "~/composables/globalLoadingState";
-import { authErrorHandler } from "./helpers";
+import { authErrorHandler, profileCheckAndUpdate } from "./helpers";
 
 const { loading } = useGlobalLoadingState();
 
 const loginUser = ({ email, pass }: { pass: string; email: string }) => {
   loading.value = true;
   signInWithEmailAndPassword(getAuth(), email.trim(), pass)
+    .then((data) => profileCheckAndUpdate(data, true))
     .catch((error) => authErrorHandler(error.code))
     .finally(() => (loading.value = false));
 };
