@@ -63,17 +63,17 @@ const goToNextStep = () =>
   });
 
 const submitForm = () => {
-  formRef.value?.validate(async (valid) => {
+  formRef.value?.validate((valid) => {
     if (valid) {
       const date = getCurrentDate();
       loading.value = true;
-      console.log("submitForm", moodState.value);
-      await addData({ [date]: moodState.value }, () => {
-        console.log(profileState.value.logData);
+
+      addData({ [date]: moodState.value }, () => {
         profileState.value.logData = {
           ...profileState.value.logData,
           [date]: moodState.value,
         };
+
         emit("submitForm");
         formRef.value?.resetFields();
         resetMoodState();

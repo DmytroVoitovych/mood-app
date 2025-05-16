@@ -59,6 +59,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StatisticBlock: typeof import('./components/StatisticBlock.vue')['default']
+    TodaysMood: typeof import('./components/TodaysMood.vue')['default']
     TrackingBlock: typeof import('./components/shared/TrackingBlock.vue')['default']
     UploadComponent: typeof import('./components/authcomponents/UploadComponent.vue')['default']
   }

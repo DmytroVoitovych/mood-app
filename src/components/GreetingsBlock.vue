@@ -9,14 +9,17 @@
         <time :datetime="CURRENT_DATE">{{ CURRENT_DATE }}</time></el-text
       >
     </div>
-    <el-button
-      class="text-preset-5"
-      type="primary"
-      size="large"
-      @click="centerDialogVisible = !centerDialogVisible"
-      >Log today's mood</el-button
-    >
-    <MoodLogModal v-model="centerDialogVisible" />
+    <section v-if="isUserMakeTodayLog" class="moodLoged"><TodaysMood /></section>
+    <div class="logSteperBlock" v-else>
+      <el-button
+        class="text-preset-5"
+        type="primary"
+        size="large"
+        @click="centerDialogVisible = !centerDialogVisible"
+        >Log today's mood</el-button
+      >
+      <MoodLogModal v-model="centerDialogVisible" />
+    </div>
   </div>
 </template>
 
@@ -33,6 +36,7 @@ const state = useGlobalProfileState();
 
 const centerDialogVisible = ref(false);
 
+const isUserMakeTodayLog = computed(() => CURRENT_DATE in state.value.logData);
 const titleClass = computed(() => {
   return isMediumScreen.value ? "text-preset-1" : "text-preset-1-mobile";
 });

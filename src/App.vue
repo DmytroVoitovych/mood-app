@@ -7,6 +7,7 @@ import { Auth, getAuth, onAuthStateChanged } from "firebase/auth";
 import { onMounted } from "vue";
 import { NavigationGuardNext, RouteLocationNormalizedLoadedGeneric, useRouter } from "vue-router";
 import { useGlobalProfileState } from "./composables/globalProfileState";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 let auth: Auth;
 const router = useRouter();
@@ -60,7 +61,21 @@ onMounted(() => {
   auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     console.log(user, "state was changed");
-    if (user && state.value.isAboard) router.push({ name: "/" });
+    if (user && state.value.isAboard) {
+      // вынести в отдельный хук
+      getDocs(collection(getFirestore(), "users", user.uid, "mood-data")).then((querySnapshot) => {
+        const userMoodList = querySnapshot.docs.reduce((acc, doc) => {
+          Object.assign(acc, doc.data());
+          return acc;
+        }, {});
+
+        if (JSON.stringify(userMoodList) !== JSON.stringify(state.value.logData)) {
+          state.value.logData = userMoodList;
+        }
+      });
+
+      router.push({ name: "/" });
+    }
     router.beforeEach(authGuard);
     if (!user) {
       router.push({ name: "/auth/SignIn" });
