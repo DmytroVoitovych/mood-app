@@ -10,6 +10,7 @@ import HappyIco from "./images/icon-happy-color.svg";
 import NeutralIco from "./images/icon-neutral-color.svg";
 import SadIco from "./images/icon-sad-color.svg";
 import VerySadIco from "./images/icon-very-sad-color.svg";
+import ReflectionIco from "./images/icon-reflection.svg";
 
 export {
   LogoIco,
@@ -24,4 +25,5 @@ export {
   NeutralIco,
   SadIco,
   VerySadIco,
+  ReflectionIco,
 };

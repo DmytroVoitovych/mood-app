@@ -9,7 +9,16 @@
         <time :datetime="CURRENT_DATE">{{ CURRENT_DATE }}</time></el-text
       >
     </div>
-    <section v-if="isUserMakeTodayLog" class="moodLoged"><TodaysMood /></section>
+    <section v-if="isUserMakeTodayLog" class="moodLoged">
+      <TodaysMood />
+      <TodaysReport><SleepReport /> </TodaysReport>
+      <TodaysReport
+        ><ReflectionReport />
+        <template #tags>
+          <MoodTags />
+        </template>
+      </TodaysReport>
+    </section>
     <div class="logSteperBlock" v-else>
       <el-button
         class="text-preset-5"
@@ -43,6 +52,10 @@ const titleClass = computed(() => {
 </script>
 
 <style lang="scss" scoped>
+.grettingBlock {
+  container-type: inline-size;
+}
+
 .grettingsBlock__info {
   padding-top: 48px;
   padding-bottom: 48px;
@@ -77,5 +90,15 @@ const titleClass = computed(() => {
 
   display: block;
   margin: 0 auto;
+}
+
+.moodLoged {
+  display: grid;
+  gap: 20px;
+
+  @include mq(large) {
+    grid-template-columns: 57% 1fr;
+    column-gap: 32px;
+  }
 }
 </style>

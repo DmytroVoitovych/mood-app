@@ -65,6 +65,7 @@ const randomQuote = computed(() => {
   background-color: var(--neutral-0);
   border: 1px solid var(--blue-100);
   border-radius: 16px;
+  grid-row: 1 / span 2;
 
   @include mq(medium) {
     --local-padding-horizontal: 32px;

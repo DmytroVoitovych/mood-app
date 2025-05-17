@@ -47,10 +47,14 @@
 
 .hero {
   margin-bottom: 48px;
+
+  @include mq(large) {
+    margin-bottom: 64px;
+  }
 }
 
 .hero:has(section) {
-  margin-bottom: 64px;
+  margin-bottom: 32px;
 }
 
 .sectionWrapper {
