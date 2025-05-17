@@ -1,11 +1,11 @@
 <template>
   <div class="todaysMood">
-    <h4 class="todaysMood__title">
-      <el-text>I’m feeling</el-text>
+    <h4 class="todaysMood__title text-preset-2">
+      <el-text class="text-preset-3">I’m feeling</el-text>
       {{ currentMood?.text }}
     </h4>
-    <component :is="currentMood?.imgSvg"></component>
-    <p class="todaysMood__moto">"{{ randomQuote }}"</p>
+    <component class="todaysMood__emoji" :is="currentMood?.imgSvg"></component>
+    <i class="todaysMood__moto text-preset-6-italic">"{{ randomQuote }}"</i>
   </div>
 </template>
 
@@ -51,7 +51,79 @@ const randomQuote = computed(() => {
 
   return quotes[num];
 });
-
-console.log(randomQuote.value);
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.todaysMood {
+  --local-padding-horizontal: 16px;
+  --local-padding-vertical: 32px;
+
+  display: grid;
+  place-items: center;
+  grid-template-rows: auto 1fr auto;
+  gap: 32px;
+  padding: 32px var(--local-padding-horizontal);
+  background-color: var(--neutral-0);
+  border: 1px solid var(--blue-100);
+  border-radius: 16px;
+
+  @include mq(medium) {
+    --local-padding-horizontal: 32px;
+
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    row-gap: 0;
+    max-height: 340px;
+  }
+
+  &__emoji {
+    width: calc((100% / 2) + var(--local-padding-vertical) + var(--local-padding-horizontal));
+    max-width: 322px;
+
+    @include mq(medium) {
+      grid-row: auto / span 2;
+      transform: translateY(64px);
+      min-width: 320px;
+    }
+  }
+
+  &__moto {
+    color: var(--neutral-900);
+
+    &::before {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-image: url("~/assets/images/icon-quote.svg");
+      background-size: cover;
+      justify-self: center;
+      margin-bottom: 17px;
+
+      @include mq(medium) {
+        justify-self: left;
+      }
+    }
+
+    @include mq(medium) {
+      align-self: end;
+      justify-self: left;
+    }
+  }
+
+  &__title {
+    color: var(--neutral-900);
+    text-align: center;
+
+    @include mq(medium) {
+      justify-self: left;
+    }
+
+    & > .el-text {
+      --el-text-color-regular: color-mix(in srgb, var(--neutral-900) 70%, transparent);
+
+      display: block;
+    }
+  }
+}
+</style>
