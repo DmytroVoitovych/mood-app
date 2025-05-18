@@ -48,6 +48,7 @@ declare module 'vue' {
     MainButton: typeof import('./components/shared/MainButton.vue')['default']
     MainLogo: typeof import('./components/shared/MainLogo.vue')['default']
     MessageBoxDemo: typeof import('./components/MessageBoxDemo.vue')['default']
+    MoodBar: typeof import('./components/MoodBar.vue')['default']
     MoodCheckboxGroup: typeof import('./components/shared/MoodCheckboxGroup.vue')['default']
     MoodForm: typeof import('./components/MoodForm.vue')['default']
     MoodLogModal: typeof import('./components/MoodLogModal.vue')['default']

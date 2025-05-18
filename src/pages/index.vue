@@ -66,6 +66,9 @@
     flex-direction: row;
   }
 }
+.statistic {
+  flex-shrink: 0;
+}
 
 :where(.statistic, .diagram) {
   border-radius: 16px;

@@ -1,7 +1,7 @@
 <template>
   <div class="inputBlock">
     <el-form-item label="Name" prop="name">
-      <el-input v-model="name" placeholder="Jane Appleseed" />
+      <el-input v-model="name" placeholder="Jane Appleseed" maxlength="60" />
     </el-form-item>
     <div class="uploadBlock">
       <el-avatar :size="64" :src="imageUrl" />
@@ -32,6 +32,7 @@
 </template>
 
 <script lang="ts" setup>
+import { useElementVisibility } from "@vueuse/core";
 import {
   genFileId,
   UploadInstance,
@@ -39,7 +40,7 @@ import {
   UploadRawFile,
   UploadUserFile,
 } from "element-plus";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { AvatarPlaceholder, LogoCircle } from "~/assets/iconImport";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 
@@ -67,9 +68,11 @@ const beforeAvatarUpload: UploadProps["beforeUpload"] = (rawFile) => {
 
   if (!isAcceptableFormats) {
     errMessage.value = FORMAT_ERR_MESSAGE;
+    upload.value!.clearFiles();
     return false;
   } else if (rawFile.size / 1024 > 250) {
     errMessage.value = SIZE_ERR_MESSAGE;
+    upload.value!.clearFiles();
     return false;
   }
   errMessage.value = "";
@@ -80,6 +83,15 @@ const handleAvatarChange: UploadProps["onChange"] = (uploadFile) => {
   if (!beforeAvatarUpload(uploadFile.raw!)) return;
   imageUrl.value = URL.createObjectURL(uploadFile.raw!);
 };
+
+const uploadIsVisible = useElementVisibility(upload);
+
+watch(
+  () => uploadIsVisible.value,
+  (visibility) => {
+    if (!visibility && errMessage.value) errMessage.value = "";
+  },
+);
 </script>
 
 <style lang="scss" scoped>

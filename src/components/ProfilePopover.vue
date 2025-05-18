@@ -4,7 +4,7 @@
     <el-popover
       trigger="click"
       :show-arrow="false"
-      :title="state.profileName"
+      :title="state.profileName || 'Anomimous'"
       :width="popoverWidth"
       :teleported="false"
       placement="bottom-end"

@@ -79,13 +79,16 @@ const questionClass = computed(() => {
 });
 
 const afterCloseAnimation = () => {
+  console.log(isSubmited.value, "test");
   if (isSubmited.value) {
+    console.log("test inside");
     dialogStapStore.value.step = 1;
     isSubmited.value = false;
   }
 };
 
 const afterSubmit = () => {
+  console.log("emit");
   isSubmited.value = true;
   dialogRef.value?.handleClose();
 };

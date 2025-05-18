@@ -11,6 +11,11 @@ import NeutralIco from "./images/icon-neutral-color.svg";
 import SadIco from "./images/icon-sad-color.svg";
 import VerySadIco from "./images/icon-very-sad-color.svg";
 import ReflectionIco from "./images/icon-reflection.svg";
+import VeryHappyWhiteIco from "./images/icon-very-happy-white.svg";
+import HappyWhiteIco from "./images/icon-happy-white.svg";
+import NeutralWhiteIco from "./images/icon-neutral-white.svg";
+import SadWhiteIco from "./images/icon-sad-white.svg";
+import VerySadWhiteIco from "./images/icon-very-sad-white.svg";
 
 export {
   LogoIco,
@@ -26,4 +31,9 @@ export {
   SadIco,
   VerySadIco,
   ReflectionIco,
+  VeryHappyWhiteIco,
+  HappyWhiteIco,
+  NeutralWhiteIco,
+  SadWhiteIco,
+  VerySadWhiteIco,
 };

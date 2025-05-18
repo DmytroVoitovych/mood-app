@@ -2,7 +2,7 @@
   <div class="diagramBlock">
     <h3 :class="titleClass" class="diagramBlock__title">Mood and sleep trends</h3>
     <div class="segementsBlock">
-      <ul class="hoursList">
+      <ul class="hoursList" ref="hoursListRef">
         <li v-for="(item, index) in HOURS_ARR" :key="index" class="hoursList__item">
           <div class="hoursList__item--text">
             <SleepIco width="10" height="10" /> <el-text class="text-preset-9">{{ item }}</el-text>
@@ -12,7 +12,7 @@
       </ul>
       <ul class="timeCurveList">
         <li v-for="date of DATE_LIST" :key="date" class="timeCurveList__item">
-          <slot :name="date"></slot>
+          <MoodBar :date="generateFullDate(date)" :height="blockHeight" />
           <el-text class="text-preset-9">{{ String(leterRegex.exec(date)) }}</el-text>
           <strong class="text-preset-8 timeCurveList__num">{{
             String(numberRegex.exec(date))
@@ -24,10 +24,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useMediaQuery } from "@vueuse/core";
-import { computed } from "vue";
+import { useMediaQuery, useResizeObserver } from "@vueuse/core";
+import { computed, ref, useTemplateRef } from "vue";
 import { SleepIco } from "~/assets/iconImport";
-import { createDateList } from "./helpers";
+import { createDateList, generateFullDate } from "./helpers";
 
 const HOURS_ARR: readonly string[] = [
   "9+ hours",
@@ -36,6 +36,15 @@ const HOURS_ARR: readonly string[] = [
   "3-4 hours",
   "0-2 hours",
 ];
+
+const el = useTemplateRef("hoursListRef");
+const blockHeight = ref("");
+
+useResizeObserver(el, (entries) => {
+  const entry = entries[0];
+  const { height } = entry.contentRect;
+  blockHeight.value = height.toString();
+});
 
 const DATE_LIST = createDateList(11);
 const leterRegex = /[A-Za-z]+/;

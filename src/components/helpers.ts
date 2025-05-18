@@ -21,3 +21,17 @@ export const createDateList = (days: number): readonly string[] => {
   }
   return dateList;
 };
+
+export const generateFullDate = (date: string) => {
+  const originalDate = new Date(date);
+  const now = new Date();
+
+  originalDate.setFullYear(now.getFullYear());
+
+  return originalDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};

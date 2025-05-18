@@ -1,6 +1,7 @@
 import { useAuth } from "@vueuse/firebase";
 import { UploadUserFile } from "element-plus";
 import { getAuth, updateProfile } from "firebase/auth";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { computed } from "vue";
 import { Router } from "vue-router";
 import { AvatarPlaceholder } from "~/assets/iconImport";
@@ -29,10 +30,14 @@ export const updateUserProfile = async (
   const avatarUrl = await getUserAvaterUrl({ name, fileList });
 
   const setFirstUserState = () => {
-    state.value.profileName = name;
-    state.value.avatar = avatarUrl || AvatarPlaceholder;
-    state.value.isAboard = true;
-    state.value.email = user.value?.email || "no email";
+    addDoc(collection(getFirestore(), "users", user.value!.uid, "on-board"), {
+      isAboard: true,
+    }).then(() => {
+      state.value.profileName = name || "Anonimous";
+      state.value.avatar = avatarUrl || AvatarPlaceholder;
+      state.value.isAboard = true;
+      state.value.email = user.value?.email || "no email";
+    });
   };
 
   const updateUserState = () => {

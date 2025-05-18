@@ -1,8 +1,12 @@
 <template>
   <div class="grettingsBlock">
     <div class="grettingsBlock__info">
-      <el-text type="primary" class="gretting" :class="isMediumScreen && 'text-preset-3'"
-        >Hello, {{ state.profileName }}!</el-text
+      <el-text
+        type="primary"
+        :truncated="true"
+        class="gretting"
+        :class="isMediumScreen && 'text-preset-3'"
+        >Hello, {{ state.profileName || "Anonimous" }}!</el-text
       >
       <h1 class="grettingsBlock__title" :class="titleClass">How are you feeling today?</h1>
       <el-text class="currentDate text-preset-6">
@@ -27,8 +31,8 @@
         @click="centerDialogVisible = !centerDialogVisible"
         >Log today's mood</el-button
       >
-      <MoodLogModal v-model="centerDialogVisible" />
     </div>
+    <MoodLogModal v-model="centerDialogVisible" />
   </div>
 </template>
 
