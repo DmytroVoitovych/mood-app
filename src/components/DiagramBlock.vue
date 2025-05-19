@@ -57,6 +57,14 @@ const titleClass = computed(() => {
 });
 </script>
 <style lang="scss" scoped>
+.segementsBlock {
+  --h-boxbar: 38px;
+  --mar-hoursBlock: 55px;
+
+  position: relative;
+  padding-bottom: calc(var(--h-boxbar) + var(--mar-hoursBlock) + 11px);
+}
+
 .diagramBlock {
   overflow-x: hidden;
   &__title {
@@ -66,8 +74,6 @@ const titleClass = computed(() => {
 }
 
 .hoursList {
-  margin-bottom: 55px;
-
   &__item:not(:last-child) {
     margin-bottom: 40px;
   }
@@ -96,8 +102,11 @@ const titleClass = computed(() => {
   overflow-y: hidden;
   padding-left: 12px;
   padding-right: 12px;
+  padding-bottom: 6px;
   scrollbar-width: thin;
   scrollbar-color: var(--blue-200) transparent;
+  position: absolute;
+  inset: 0;
 
   @include mq(medium) {
     padding-left: 0;
@@ -109,6 +118,10 @@ const titleClass = computed(() => {
     flex-direction: column;
     align-items: center;
     gap: 6px;
+    align-self: flex-end;
+    width: 40px;
+    flex-shrink: 0;
+    position: relative;
   }
 
   &__num {

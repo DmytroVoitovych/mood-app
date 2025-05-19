@@ -68,6 +68,8 @@ const bgColor = computed(() => {
   width: 40px;
   padding: 5px;
   border-radius: 999px;
+  bottom: calc(100% + 11px);
+  position: absolute;
 
   svg {
     display: block;
