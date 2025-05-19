@@ -118,6 +118,7 @@ const randomQuote = computed(() => {
 
     @include mq(medium) {
       justify-self: left;
+      text-align: left;
     }
 
     & > .el-text {

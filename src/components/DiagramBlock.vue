@@ -43,7 +43,7 @@ const blockHeight = ref("");
 useResizeObserver(el, (entries) => {
   const entry = entries[0];
   const { height } = entry.contentRect;
-  blockHeight.value = height.toString();
+  blockHeight.value = `${height.toString()}px`;
 });
 
 const DATE_LIST = createDateList(11);
