@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AuthForm: typeof import('./components/shared/AuthForm.vue')['default']
+    BarPopover: typeof import('./components/BarPopover.vue')['default']
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     ContainerBase: typeof import('./components/shared/ContainerBase.vue')['default']
     DiagramBlock: typeof import('./components/DiagramBlock.vue')['default']

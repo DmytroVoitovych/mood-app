@@ -1,7 +1,9 @@
 <template>
-  <div v-if="currentBar" class="moodBar">
-    <component :is="mood[currentBar.mood]?.imageWhite || ''"></component>
-  </div>
+  <BarPopover v-if="currentBar">
+    <div class="moodBar">
+      <component :is="mood[currentBar.mood]?.imageWhite || ''"></component>
+    </div>
+  </BarPopover>
 </template>
 
 <script lang="ts" setup>
@@ -56,7 +58,7 @@ const sleep = {
   "3.5": 43,
   "5.5": 63,
   "7.5": 83,
-  "9": 100,
+  "9": 103,
 };
 
 const currentBar = computed<MoodForm | undefined>(() => {
@@ -85,20 +87,23 @@ const dreamPercentage = computed(() => {
     --box-pad-gap: 6px;
   }
 
-  background-color: v-bind(bgColor);
-  width: 40px;
-  padding: 5px;
-  border-radius: 999px;
-  bottom: calc(100% + var(--pad-gap));
-  position: absolute;
-  height: calc(
-    (100% + var(--box-pad-gap) + var(--pad-gap) + var(--box-height)) * v-bind(dreamPercentage) / 100
-  );
+  & {
+    background-color: v-bind(bgColor);
+    width: 40px;
+    padding: 5px;
+    border-radius: 999px;
+    bottom: calc(100% + var(--pad-gap));
+    position: absolute;
+    height: calc(
+      (100% + var(--box-pad-gap) + var(--pad-gap) + var(--box-height)) * v-bind(dreamPercentage) /
+        100
+    );
 
-  svg {
-    display: block;
-    margin: auto;
-    margin-top: 0;
+    svg {
+      display: block;
+      margin: auto;
+      margin-top: 0;
+    }
   }
 }
 </style>

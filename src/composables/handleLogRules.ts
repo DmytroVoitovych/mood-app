@@ -46,7 +46,6 @@ export const useLogRules = () => {
           errInfo.value = isValid ? "" : (r.message as string);
           return isValid;
         },
-        trigger: "change",
       },
     ],
   });

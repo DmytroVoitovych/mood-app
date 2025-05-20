@@ -62,21 +62,22 @@ const goToNextStep = () =>
     console.log("test");
   });
 
-const submitForm = () => {
+const submitForm = async () => {
   formRef.value?.validate((valid) => {
     if (valid) {
       const date = getCurrentDate();
       loading.value = true;
+      const moodData = { ...moodState.value };
 
       addData({ [date]: moodState.value }, () => {
         profileState.value.logData = {
           ...profileState.value.logData,
-          [date]: moodState.value,
+          [date]: moodData,
         };
 
         emit("submitForm");
-        formRef.value?.resetFields();
         resetMoodState();
+        formRef.value?.resetFields();
       });
     }
   });
