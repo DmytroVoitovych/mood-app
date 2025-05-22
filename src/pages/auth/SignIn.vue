@@ -15,13 +15,17 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import AuthForm from "~/components/shared/AuthForm.vue";
 import { useGlobalLoadingState } from "~/composables/globalLoadingState";
 import { authErrorHandler, profileCheckAndUpdate } from "./helpers";
+import { useRouter } from "vue-router";
 
 const { loading } = useGlobalLoadingState();
+const router = useRouter();
 
 const loginUser = ({ email, pass }: { pass: string; email: string }) => {
   loading.value = true;
+
   signInWithEmailAndPassword(getAuth(), email.trim(), pass)
     .then((data) => profileCheckAndUpdate(data, true))
+    .then(() => router.push({ name: "/" }))
     .catch((error) => authErrorHandler(error.code))
     .finally(() => (loading.value = false));
 };

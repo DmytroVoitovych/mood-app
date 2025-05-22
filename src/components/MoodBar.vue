@@ -3,6 +3,25 @@
     <div class="moodBar">
       <component :is="mood[currentBar.mood]?.imageWhite || ''"></component>
     </div>
+    <template #popoverContent>
+      <ul class="text-preset-8 popoverList">
+        <li>
+          Mood<el-text class="text-preset-7"
+            ><component width="16" height="16" :is="mood[currentBar.mood]?.imgSvg || ''"></component
+            >{{ mood[currentBar.mood].text }}</el-text
+          >
+        </li>
+        <li>
+          Sleep<el-text class="text-preset-7">{{ dreamText }}</el-text>
+        </li>
+        <li>
+          Reflection<el-text class="text-preset-7">{{ currentBar.journalEntry }}</el-text>
+        </li>
+        <li>
+          Tags<el-text class="text-preset-7">{{ currentBar.feelings.join(", ") }}</el-text>
+        </li>
+      </ul>
+    </template>
   </BarPopover>
 </template>
 
@@ -54,11 +73,11 @@ const mood: Record<string, { text: string; imgSvg: string; imageWhite: string; b
 };
 
 const sleep = {
-  "1": 23,
-  "3.5": 43,
-  "5.5": 63,
-  "7.5": 83,
-  "9": 103,
+  "1": { percent: 23, text: "0-2 hours" },
+  "3.5": { percent: 43, text: "3-4 hours" },
+  "5.5": { percent: 63, text: "5-6 hours" },
+  "7.5": { percent: 83, text: "7-8 hours" },
+  "9": { percent: 102, text: "9+ hours" },
 };
 
 const currentBar = computed<MoodForm | undefined>(() => {
@@ -72,8 +91,13 @@ const bgColor = computed(() => {
 });
 
 const dreamPercentage = computed(() => {
-  if (!currentBar.value?.sleepHours) return sleep["1"];
-  return sleep[currentBar.value.sleepHours as keyof typeof sleep] || sleep["1"];
+  if (!currentBar.value?.sleepHours) return sleep["1"].percent;
+  return sleep[currentBar.value.sleepHours as keyof typeof sleep].percent || sleep["1"].percent;
+});
+
+const dreamText = computed(() => {
+  if (!currentBar.value?.sleepHours) return sleep["1"].text;
+  return sleep[currentBar.value.sleepHours as keyof typeof sleep].text || sleep["1"].text;
 });
 </script>
 
@@ -103,6 +127,27 @@ const dreamPercentage = computed(() => {
       display: block;
       margin: auto;
       margin-top: 0;
+    }
+
+    @media (hover: hover) {
+      cursor: pointer;
+    }
+  }
+}
+
+.popoverList {
+  display: grid;
+  gap: 12px;
+
+  li {
+    --el-text-color-regular: var(--neutral-900);
+    gap: 6px;
+    display: grid;
+
+    &:first-child .el-text {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
   }
 }

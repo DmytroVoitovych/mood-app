@@ -5,10 +5,14 @@
     content="Left Top prompts info"
     placement="left-start"
     v-bind="isMounted ? { appendTo: '.segementsBlock' } : {}"
+    popper-class="barPopover"
+    :popper-style="{ 'max-width': '175px' }"
+    width="100%"
   >
     <template #reference>
       <slot></slot>
     </template>
+    <slot name="popoverContent"></slot>
   </el-popover>
 </template>
 
@@ -19,3 +23,5 @@ const isMounted = ref(false);
 
 onMounted(() => (isMounted.value = true));
 </script>
+
+<style lang="scss" scoped></style>

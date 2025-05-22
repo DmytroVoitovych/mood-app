@@ -12,6 +12,7 @@ import "element-plus/theme-chalk/src/notification.scss";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebase/firebaseConfig";
 import { getFirestore } from "firebase/firestore";
+
 initializeApp(firebaseConfig);
 getFirestore(initializeApp(firebaseConfig));
 

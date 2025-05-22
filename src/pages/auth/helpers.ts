@@ -1,5 +1,5 @@
 import { ElNotification } from "element-plus";
-import { UserCredential } from "firebase/auth";
+import { getAuth, UserCredential } from "firebase/auth";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 
 const registrationFirebaseCode: { email: string; weak: string; exists: string } = {
@@ -89,6 +89,7 @@ const profileCheckAndUpdate = (data: UserCredential, isAboard: boolean) => {
   const state = useGlobalProfileState();
 
   if (data.user.email !== state.value.email) {
+    console.log(data.user.photoURL, "photo");
     state.value.avatar = data.user.photoURL || "";
     state.value.email = data.user.email || "";
     state.value.profileName = data.user.displayName || "";

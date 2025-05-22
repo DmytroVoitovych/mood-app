@@ -1,5 +1,5 @@
 <template>
-  <div class="grettingsBlock">
+  <div class="grettingsBlock" :key="refresh">
     <div class="grettingsBlock__info">
       <el-text
         type="primary"
@@ -40,19 +40,32 @@
 import { useMediaQuery } from "@vueuse/core";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 import { getCurrentDate } from "./helpers";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import MoodLogModal from "./MoodLogModal.vue";
+import { useDocumentVisibility } from "@vueuse/core";
 
 const CURRENT_DATE = getCurrentDate();
 const isMediumScreen = useMediaQuery("(min-width: 530px)");
 const state = useGlobalProfileState();
+const visibility = useDocumentVisibility();
 
 const centerDialogVisible = ref(false);
+const refresh = ref(false);
 
 const isUserMakeTodayLog = computed(() => CURRENT_DATE in state.value.logData);
 const titleClass = computed(() => {
   return isMediumScreen.value ? "text-preset-1" : "text-preset-1-mobile";
 });
+
+const syncDate = (visible: typeof visibility.value) => {
+  const nowDate = getCurrentDate();
+
+  if (CURRENT_DATE !== nowDate && visible === "visible") {
+    refresh.value = !refresh.value;
+  }
+};
+
+watch(() => visibility.value, syncDate);
 </script>
 
 <style lang="scss" scoped>

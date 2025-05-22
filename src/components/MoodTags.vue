@@ -28,6 +28,7 @@ const currentTags = computed(() => {
   gap: 12px;
   margin-right: auto;
   margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .el-text {

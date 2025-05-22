@@ -10,12 +10,15 @@
           <el-divider />
         </li>
       </ul>
+
       <ul class="timeCurveList">
-        <li v-for="date of DATE_LIST" :key="date" class="timeCurveList__item">
-          <MoodBar :date="generateFullDate(date)" :height="blockHeight" />
-          <el-text class="text-preset-9">{{ String(leterRegex.exec(date)) }}</el-text>
+        <li v-for="date of DATE_LIST.toReversed()" :key="date" class="timeCurveList__item">
+          <MoodBar :date="Object.values(date)[0]" :height="blockHeight" />
+          <el-text class="text-preset-9">{{
+            String(leterRegex.exec(Object.keys(date)[0]))
+          }}</el-text>
           <strong class="text-preset-8 timeCurveList__num">{{
-            String(numberRegex.exec(date))
+            String(numberRegex.exec(Object.keys(date)[0]))
           }}</strong>
         </li>
       </ul>
@@ -27,7 +30,7 @@
 import { useMediaQuery, useResizeObserver } from "@vueuse/core";
 import { computed, ref, useTemplateRef } from "vue";
 import { SleepIco } from "~/assets/iconImport";
-import { createDateList, generateFullDate } from "./helpers";
+import { createDateList } from "./helpers";
 
 const HOURS_ARR: readonly string[] = [
   "9+ hours",
@@ -107,6 +110,7 @@ const titleClass = computed(() => {
   scrollbar-color: var(--blue-200) transparent;
   position: absolute;
   inset: 0;
+  flex-direction: row-reverse;
 
   @include mq(medium) {
     padding-left: 0;

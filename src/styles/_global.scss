@@ -77,3 +77,12 @@ body {
   background-attachment: fixed;
   background-size: cover;
 }
+
+.el-popover.barPopover {
+  --el-popover-border-color: var(--blue-100);
+  --el-popover-padding: 12px 12px;
+  --el-popover-border-radius: 10px;
+  --el-box-shadow-light: 0 4px 7px 0 rgba(33, 33, 77, 0.16);
+  --el-border-color-light: var(--blue-100);
+  --el-text-color-regular: var(--neutral-600);
+}
