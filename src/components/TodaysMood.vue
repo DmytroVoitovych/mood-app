@@ -30,7 +30,7 @@ const mood = [
 
 const currentMood = computed(() => {
   const data = state.value.logData as Record<string, MoodForm>;
-  const currentMood = data[date].mood;
+  const currentMood = data[date]?.mood || [];
 
   return (
     mood.find((item) => item.value === currentMood) || {

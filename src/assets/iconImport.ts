@@ -16,6 +16,10 @@ import HappyWhiteIco from "./images/icon-happy-white.svg";
 import NeutralWhiteIco from "./images/icon-neutral-white.svg";
 import SadWhiteIco from "./images/icon-sad-white.svg";
 import VerySadWhiteIco from "./images/icon-very-sad-white.svg";
+import SameIco from "./images/icon-trend-same.svg";
+import IncreaseIco from "./images/icon-trend-increase.svg";
+import DecreaseIco from "./images/icon-trend-decrease.svg";
+import GoogleIco from "./images/icon-google.svg";
 
 export {
   LogoIco,
@@ -36,4 +40,8 @@ export {
   NeutralWhiteIco,
   SadWhiteIco,
   VerySadWhiteIco,
+  SameIco,
+  IncreaseIco,
+  DecreaseIco,
+  GoogleIco,
 };

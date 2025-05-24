@@ -1,5 +1,11 @@
 <template>
-  <el-form ref="formRef" :model="moodState" @submit.prevent="currentEmitHandler" :rules="rules">
+  <el-form
+    ref="formRef"
+    :model="moodState"
+    @submit.prevent="currentEmitHandler"
+    :rules="rules"
+    v-bind="loading ? { inert: '' } : {}"
+  >
     <el-form-item :prop="keyListFromMoodState[step - 1]">
       <slot name="formContent"></slot>
       <template #error>

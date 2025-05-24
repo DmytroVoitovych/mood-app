@@ -6,7 +6,9 @@
     >
   </div>
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineProps<{ currentColor?: string }>();
+</script>
 
 <style lang="scss" scoped>
 .trackingBlock {
@@ -24,9 +26,31 @@
   h3 {
     margin-bottom: 12px;
     color: var(--neutral-900);
+
+    :deep(.trackSleep) {
+      color: var(--neutral-0);
+    }
   }
   .el-text {
     --el-text-color-regular: color-mix(in srgb, var(--neutral-900) 70%, transparent);
+  }
+
+  &:has(.trackSleep) {
+    background-color: var(--blue-600);
+  }
+
+  &:has(.trackFlex) {
+    background-color: v-bind(currentColor);
+  }
+
+  &:has(.trackFlex) .el-text {
+    --el-text-color-regular: var(--neutral-900);
+    text-wrap-style: balance;
+  }
+
+  &:has(.trackSleep) .el-text {
+    --el-text-color-regular: var(--neutral-0);
+    text-wrap-style: balance;
   }
 }
 </style>

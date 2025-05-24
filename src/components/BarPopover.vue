@@ -8,6 +8,7 @@
     popper-class="barPopover"
     :popper-style="{ 'max-width': '175px' }"
     width="100%"
+    :trigger="isHoverSupported ? 'hover' : 'click'"
   >
     <template #reference>
       <slot></slot>
@@ -17,10 +18,11 @@
 </template>
 
 <script lang="ts" setup>
+import { useMediaQuery } from "@vueuse/core";
 import { onMounted, ref } from "vue";
 
 const isMounted = ref(false);
-
+const isHoverSupported = useMediaQuery("(hover: hover)");
 onMounted(() => (isMounted.value = true));
 </script>
 

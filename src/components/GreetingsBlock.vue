@@ -1,5 +1,5 @@
 <template>
-  <div class="grettingsBlock" :key="refresh">
+  <div class="grettingsBlock">
     <div class="grettingsBlock__info">
       <el-text
         type="primary"
@@ -40,32 +40,46 @@
 import { useMediaQuery } from "@vueuse/core";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 import { getCurrentDate } from "./helpers";
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import MoodLogModal from "./MoodLogModal.vue";
 import { useDocumentVisibility } from "@vueuse/core";
+import { useRouter } from "vue-router";
 
-const CURRENT_DATE = getCurrentDate();
+const router = useRouter();
+const CURRENT_DATE = ref(getCurrentDate());
 const isMediumScreen = useMediaQuery("(min-width: 530px)");
 const state = useGlobalProfileState();
 const visibility = useDocumentVisibility();
 
 const centerDialogVisible = ref(false);
-const refresh = ref(false);
 
-const isUserMakeTodayLog = computed(() => CURRENT_DATE in state.value.logData);
+const isUserMakeTodayLog = computed(() => CURRENT_DATE.value in state.value.logData);
 const titleClass = computed(() => {
   return isMediumScreen.value ? "text-preset-1" : "text-preset-1-mobile";
 });
 
+const documentFocus = () => {
+  syncDate(visibility.value);
+};
+
 const syncDate = (visible: typeof visibility.value) => {
   const nowDate = getCurrentDate();
-
-  if (CURRENT_DATE !== nowDate && visible === "visible") {
-    refresh.value = !refresh.value;
+  console.log(isUserMakeTodayLog.value, "test refresh before");
+  if (CURRENT_DATE.value !== nowDate && visible === "visible") {
+    console.log(isUserMakeTodayLog.value, "test refresh after");
+    router.go(0);
   }
 };
 
 watch(() => visibility.value, syncDate);
+
+onMounted(() => {
+  window.addEventListener("focus", documentFocus);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("focus", documentFocus);
+});
 </script>
 
 <style lang="scss" scoped>

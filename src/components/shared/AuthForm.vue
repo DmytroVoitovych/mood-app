@@ -9,6 +9,7 @@
       class="auth onboarding"
       :class="settingFlag ? 'setting' : ''"
       ref="formRef"
+      v-bind="loading ? { inert: '' } : {}"
     >
       <div class="formTextBlock">
         <h1 class="text-preset-3 authTitle"><slot name="formTitle"> Create an account </slot></h1>
@@ -39,6 +40,7 @@
           >
         </el-text>
       </div>
+      <GoogleBlock v-if="!settingFlag" />
     </el-form>
   </div>
 </template>
@@ -123,7 +125,7 @@ const currentForm = computed(() => (props.nextLink ? authForm : uploadForm));
     }
   }
 
-  .el-button {
+  .el-button:not(:last-child) {
     margin-bottom: 20px;
   }
 

@@ -22,7 +22,7 @@ const formPasswordRules: FormItemRule[] = [
 
 const googleAuthFirebaseCode: { popup: string; cancelled: string; network: string } = {
   popup: "auth/popup-blocked",
-  cancelled: "auth/cancelled-popup-request",
+  cancelled: "auth/popup-closed-by-user",
   network: "auth/network-request-failed",
 };
 
@@ -39,7 +39,7 @@ const googleAuthErrorHandler = (errorCode: string) => {
       ElNotification({
         title: "Google Login Cancelled",
         message: "Google sign in was cancelled",
-        type: "error",
+        type: "info",
       });
       break;
     case googleAuthFirebaseCode.network:

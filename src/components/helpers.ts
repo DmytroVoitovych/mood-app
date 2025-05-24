@@ -1,3 +1,5 @@
+import { MoodForm } from "~/composables/globalMoodState";
+
 export const getCurrentDate = () =>
   new Date().toLocaleDateString("en-US", {
     weekday: "long",
@@ -36,4 +38,14 @@ export const createDateList = (days: number): readonly Record<string, string>[] 
   }
 
   return dateList;
+};
+
+export const getMediane = (arr: MoodForm[], key: keyof MoodForm) => {
+  if (!arr?.length) return null;
+  console.log(arr.toSorted((a, b) => +a[key] - +b[key]));
+  // Median formula:
+  // firstly sort numbers
+  // If n is odd: Median = value at position (n + 1) / 2 - 1
+  const numPosition = (arr.length + 1) / 2 - 1; // only for odd
+  return arr.toSorted((a, b) => +a[key] - +b[key])[numPosition][key].toString();
 };
