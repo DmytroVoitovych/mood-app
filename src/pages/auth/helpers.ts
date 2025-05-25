@@ -48,7 +48,6 @@ const registrationErrorHandler = (errorCode: string) => {
 };
 
 const authErrorHandler = (errorCode: string) => {
-  console.log(errorCode);
   switch (errorCode) {
     case firebaseCode.email:
       ElNotification({
@@ -89,7 +88,6 @@ const profileCheckAndUpdate = (data: UserCredential, isAboard: boolean) => {
   const state = useGlobalProfileState();
 
   if (data.user.email !== state.value.email) {
-    console.log(data.user.photoURL, "photo");
     state.value.avatar = data.user.photoURL || "";
     state.value.email = data.user.email || "";
     state.value.profileName = data.user.displayName || "";

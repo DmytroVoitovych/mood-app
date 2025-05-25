@@ -64,9 +64,7 @@ const documentFocus = () => {
 
 const syncDate = (visible: typeof visibility.value) => {
   const nowDate = getCurrentDate();
-  console.log(isUserMakeTodayLog.value, "test refresh before");
   if (CURRENT_DATE.value !== nowDate && visible === "visible") {
-    console.log(isUserMakeTodayLog.value, "test refresh after");
     router.go(0);
   }
 };

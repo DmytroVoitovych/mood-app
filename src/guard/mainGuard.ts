@@ -9,8 +9,6 @@ export const authGuard = async (
   auth: Auth,
   state: GlobalProfileState,
 ) => {
-  console.log("auth test");
-
   const isLoggedIn = !!auth.currentUser;
 
   // const hasResetCode = to.query.oobCode || to.query.mode === "resetPassword";
@@ -31,7 +29,6 @@ export const authGuard = async (
   }
 
   if (!to.meta.requiresAuth && isLoggedIn && state.value.isAboard) {
-    console.log("state.value.isAboard", state.value.isAboard, to.meta.requiresAuth);
     next({ name: "/" });
     return;
   }
@@ -42,10 +39,9 @@ export const authGuard = async (
     !state.value.isAboard &&
     to.name !== "/auth/OnBoarding"
   ) {
-    console.log("state.value.isAboard", state.value.isAboard, to.meta.requiresAuth);
     next({ name: "/auth/OnBoarding" });
     return;
   }
-  console.log("end");
+
   next();
 };

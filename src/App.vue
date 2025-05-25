@@ -22,7 +22,6 @@ router.beforeEach((...rest) => authGuard(...rest, auth, state));
 onMounted(() => {
   auth = getAuth();
   onAuthStateChanged(auth, (user) => {
-    console.log(user, "state was changed", state);
     if (user) syncData(state, user);
     directRouteProtection(user, state, router, route);
   });

@@ -1,8 +1,6 @@
-import MainFormElements from "./MainFormElements.vue";
-import ForgotPassword from "./ForgotPassword.vue";
-import { ElNotification, FormItemRule } from "element-plus";
-
-import ResetPassword from "./ResetPassword.vue";
+import { ElMessage, ElMessageBox, ElNotification, FormItemRule } from "element-plus";
+import { FirebaseError } from "firebase/app";
+import { fetchSignInMethodsForEmail, getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const formEmailRules: FormItemRule[] = [
   {
@@ -59,4 +57,43 @@ const googleAuthErrorHandler = (errorCode: string) => {
   }
 };
 
-export { formEmailRules, formPasswordRules, googleAuthErrorHandler };
+export const errorResetLinkSendingInform = (err: FirebaseError) => {
+  return ElMessageBox.alert(err.message || "Error sending reset link. Please try again.", {
+    showClose: false,
+    confirmButtonText: "OK",
+    title: "Error",
+    customClass: "errAlertTitle",
+  });
+};
+
+const send = ({ value }: { value: string }) => {
+  return fetchSignInMethodsForEmail(getAuth(), value)
+    .then((userList) => !userList.length && Promise.reject(new Error("Email was not registrated")))
+    .then(() => sendPasswordResetEmail(getAuth(), value))
+    .then(() =>
+      ElMessage({
+        type: "success",
+        message: `We sent reset link on your email`,
+      }),
+    )
+    .catch(errorResetLinkSendingInform);
+};
+
+const sendResetLink = () => {
+  ElMessageBox.prompt("Please input your e-mail", "Password reset", {
+    confirmButtonText: "Send reset link",
+    cancelButtonText: "Cancel",
+    inputPattern:
+      /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+    inputErrorMessage: "Invalid Email",
+  })
+    .then(send)
+    .catch(() => {
+      ElMessage({
+        type: "info",
+        message: "Input canceled",
+      });
+    });
+};
+
+export { formEmailRules, formPasswordRules, googleAuthErrorHandler, sendResetLink };

@@ -67,7 +67,7 @@ const tenItemsSlice = computed(() => {
   if (arrFromLogData.length >= 5) {
     return Object.keys(state.value.logData)
       .toSorted((a, b) => new Date(b).getTime() - new Date(a).getTime())
-      .slice(-11)
+      .slice(0, 10)
       .map((e) => (state.value.logData as Record<string, MoodForm>)[e]);
   }
   return [];

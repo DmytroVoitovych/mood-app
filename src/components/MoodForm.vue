@@ -65,7 +65,6 @@ const resetMoodState = () => {
 const goToNextStep = () =>
   formRef.value?.validate((valid) => {
     if (valid) emit("nextStep");
-    console.log("test");
   });
 
 const submitForm = async () => {

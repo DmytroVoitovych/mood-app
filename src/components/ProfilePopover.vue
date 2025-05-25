@@ -1,6 +1,6 @@
 <template>
   <div class="profileBlock">
-    <el-avatar :size="40" :src="state.avatar" />
+    <el-avatar :size="40" :src="state.avatar || AvatarPlaceholder" />
     <el-popover
       trigger="click"
       :show-arrow="false"
@@ -33,7 +33,7 @@
 import { useMediaQuery } from "@vueuse/core";
 import { getAuth, signOut } from "firebase/auth";
 import { computed } from "vue";
-import { ArrowIco, LogoutIco, SettingIco } from "~/assets/iconImport";
+import { ArrowIco, AvatarPlaceholder, LogoutIco, SettingIco } from "~/assets/iconImport";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 
 const isMediumScreen = useMediaQuery("(min-width: 530px)");

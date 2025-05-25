@@ -5,6 +5,7 @@
     :show-close="false"
     ref="dialogRef"
     @closed="afterCloseAnimation"
+    top="1vh"
   >
     <template #header>
       <h2 class="moodLogModal__title" :class="titleClass">Log your mood</h2>
@@ -79,16 +80,13 @@ const questionClass = computed(() => {
 });
 
 const afterCloseAnimation = () => {
-  console.log(isSubmited.value, "test");
   if (isSubmited.value) {
-    console.log("test inside");
     dialogStapStore.value.step = 1;
     isSubmited.value = false;
   }
 };
 
 const afterSubmit = () => {
-  console.log("emit");
   isSubmited.value = true;
   dialogRef.value?.handleClose();
 };

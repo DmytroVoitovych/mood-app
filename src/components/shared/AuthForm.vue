@@ -40,7 +40,7 @@
           >
         </el-text>
       </div>
-      <GoogleBlock v-if="!settingFlag" />
+      <GoogleBlock v-if="!settingFlag && nextLink" />
     </el-form>
   </div>
 </template>

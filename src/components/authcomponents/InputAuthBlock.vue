@@ -21,7 +21,12 @@
       size="large"
       :rules="formPasswordRules"
     >
-      <el-button v-show="route.name === '/auth/SignIn'" class="reset" type="text" @click="open"
+      <el-button
+        v-show="route.name === '/auth/SignIn'"
+        type="primary"
+        class="reset"
+        text
+        @click="sendResetLink"
         >reset password?</el-button
       >
       <el-input
@@ -38,36 +43,12 @@
 
 <script lang="ts" setup>
 import { useRoute } from "vue-router";
-import { formEmailRules, formPasswordRules } from "./helpers";
+import { formEmailRules, formPasswordRules, sendResetLink } from "./helpers";
 
 const route = useRoute();
 
 const email = defineModel<string>("email");
 const pass = defineModel<string>("pass");
-
-import { ElMessage, ElMessageBox } from "element-plus";
-
-const open = () => {
-  ElMessageBox.prompt("Please input your e-mail", "Password reset", {
-    confirmButtonText: "Send reset link",
-    cancelButtonText: "Cancel",
-    inputPattern:
-      /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-    inputErrorMessage: "Invalid Email",
-  })
-    .then(({ value }) => {
-      ElMessage({
-        type: "success",
-        message: `Your email is:${value}`,
-      });
-    })
-    .catch(() => {
-      ElMessage({
-        type: "info",
-        message: "Input canceled",
-      });
-    });
-};
 </script>
 
 <style lang="scss" scoped>

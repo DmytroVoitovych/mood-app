@@ -42,7 +42,6 @@ export const createDateList = (days: number): readonly Record<string, string>[] 
 
 export const getMediane = (arr: MoodForm[], key: keyof MoodForm) => {
   if (!arr?.length) return null;
-  console.log(arr.toSorted((a, b) => +a[key] - +b[key]));
   // Median formula:
   // firstly sort numbers
   // If n is odd: Median = value at position (n + 1) / 2 - 1
