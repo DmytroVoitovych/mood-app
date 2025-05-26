@@ -28,9 +28,8 @@ npm-debug.log*
 /out
 
 # IDEs and editors
-/.idea
-/.vscode
-.vscode
+.idea/
+.vscode/
 *.swp
 *.swo
 
