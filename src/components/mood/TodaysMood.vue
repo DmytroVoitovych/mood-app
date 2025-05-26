@@ -12,9 +12,9 @@
 <script lang="ts" setup>
 import { HappyIco, NeutralIco, SadIco, VeryHappyIco, VerySadIco } from "~/assets/iconImport";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
-import { getCurrentDate } from "./helpers";
+import { getCurrentDate } from "../../core/utils/helpers";
 import { computed } from "vue";
-import { MoodForm } from "~/composables/globalMoodState";
+import { MoodForm } from "~/core/types/types";
 import moto from "~/staticData/moodQuotes.json";
 
 const state = useGlobalProfileState();

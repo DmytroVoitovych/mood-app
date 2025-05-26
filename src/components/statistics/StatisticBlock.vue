@@ -47,8 +47,8 @@
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
-import { MoodForm } from "~/composables/globalMoodState";
-import { getMediane } from "./helpers";
+import { MoodForm } from "~/core/types/types";
+import { getMediane } from "../../core/utils/helpers";
 import { mood, sleep, trend } from "./staticDataForStatistic";
 import { SleepIco } from "~/assets/iconImport";
 

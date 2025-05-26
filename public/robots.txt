@@ -1,0 +1,17 @@
+# robots.txt for Mood Tracking App
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow auth routes
+Disallow: /auth/
+
+# Disallow Firebase endpoints
+Disallow: /firebase/
+
+# Disallow static data
+Disallow: /staticData/
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10

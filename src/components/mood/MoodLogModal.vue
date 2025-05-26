@@ -49,9 +49,10 @@
 import { useMediaQuery, useSessionStorage } from "@vueuse/core";
 import { DialogInstance } from "element-plus";
 import { computed, ref, useTemplateRef } from "vue";
-import MoodRadioGroup from "./shared/MoodRadioGroup.vue";
-import MoodCheckboxGroup from "./shared/MoodCheckboxGroup.vue";
-import MoodTextArea from "./shared/MoodTextArea.vue";
+import MoodCheckboxGroup from "../shared/MoodCheckboxGroup.vue";
+import MoodTextArea from "../shared/MoodTextArea.vue";
+import MoodRadioGroup from "../shared/MoodRadioGroup.vue";
+import MoodForm from "./MoodForm.vue";
 
 const STATIC_MOOD_DATA = {
   questions: [

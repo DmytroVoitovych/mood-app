@@ -2,6 +2,7 @@
   <div class="authBlock">
     <MainLogo v-if="!settingFlag" />
     <el-form
+      @keydown.enter="$emit('authFormEmit', currentForm)"
       :model="currentForm"
       label-position="top"
       label-width="100%"

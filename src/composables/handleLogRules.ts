@@ -1,6 +1,6 @@
 import { reactive, ref } from "vue";
-import { MoodForm } from "./globalMoodState";
 import { FormRules } from "element-plus";
+import { MoodForm } from "~/core/types/types";
 
 export const useLogRules = () => {
   const errInfo = ref("");

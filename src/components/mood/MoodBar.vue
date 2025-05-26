@@ -27,9 +27,9 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { MoodForm } from "~/composables/globalMoodState";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
-import { mood, sleep } from "./staticDataForStatistic";
+import { MoodForm } from "~/core/types/types";
+import { mood, sleep } from "../statistics/staticDataForStatistic";
 
 const props = defineProps<{
   date: string;

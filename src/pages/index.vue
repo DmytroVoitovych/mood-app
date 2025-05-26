@@ -18,7 +18,10 @@
   </el-container>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import DiagramBlock from "~/components/statistics/DiagramBlock.vue";
+import StatisticBlock from "~/components/statistics/StatisticBlock.vue";
+</script>
 <style lang="scss" scoped>
 .el-container {
   display: block;

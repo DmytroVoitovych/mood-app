@@ -39,11 +39,15 @@
 <script lang="ts" setup>
 import { useMediaQuery } from "@vueuse/core";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
-import { getCurrentDate } from "./helpers";
+import { getCurrentDate } from "../core/utils/helpers";
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import MoodLogModal from "./MoodLogModal.vue";
 import { useDocumentVisibility } from "@vueuse/core";
 import { useRouter } from "vue-router";
+import MoodLogModal from "./mood/MoodLogModal.vue";
+import MoodTags from "./mood/MoodTags.vue";
+import TodaysMood from "./mood/TodaysMood.vue";
+import ReflectionReport from "./reports/ReflectionReport.vue";
+import SleepReport from "./reports/SleepReport.vue";
 
 const router = useRouter();
 const CURRENT_DATE = ref(getCurrentDate());

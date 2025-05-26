@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { updateUserProfile } from "~/composables/updateUserProfile";
-import ProfilePopover from "../ProfilePopover.vue";
+import ProfilePopover from "../profile/ProfilePopover.vue";
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 

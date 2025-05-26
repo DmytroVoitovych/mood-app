@@ -1,8 +1,8 @@
 import { getAuth, User } from "firebase/auth";
 import { collection, addDoc, getFirestore, getDocs } from "firebase/firestore";
 import { useGlobalLoadingState } from "~/composables/globalLoadingState";
-import { MoodForm } from "~/composables/globalMoodState";
 import { GlobalProfileState } from "~/composables/globalProfileState";
+import { MoodForm } from "~/core/types/types";
 
 export const useDataBaseByFirebase = () => {
   const db = getFirestore();

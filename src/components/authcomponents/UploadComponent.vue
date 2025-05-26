@@ -4,7 +4,7 @@
       <el-input v-model="name" placeholder="Jane Appleseed" maxlength="60" />
     </el-form-item>
     <div class="uploadBlock">
-      <el-avatar :size="64" :src="imageUrl" />
+      <el-avatar :size="64" :src="imageUrl" alt="user profile avatar" />
       <el-upload
         ref="upload"
         v-model:file-list="fileList"

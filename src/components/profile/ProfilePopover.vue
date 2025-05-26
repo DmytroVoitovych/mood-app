@@ -1,6 +1,6 @@
 <template>
   <div class="profileBlock">
-    <el-avatar :size="40" :src="state.avatar || AvatarPlaceholder" />
+    <el-avatar :size="40" :src="state.avatar || AvatarPlaceholder" alt="user profile avatar" />
     <el-popover
       trigger="click"
       :show-arrow="false"

@@ -7,8 +7,8 @@ import { Auth, getAuth, onAuthStateChanged } from "firebase/auth";
 import { onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useGlobalProfileState } from "./composables/globalProfileState";
-import { authGuard } from "./guard/mainGuard";
-import { directRouteProtection } from "./guard/guardFromDirectIn";
+import { authGuard } from "./core/guard/mainGuard";
+import { directRouteProtection } from "./core/guard/guardFromDirectIn";
 import { useDataBaseByFirebase } from "./firebase/useFirebaseHelperFunctions";
 
 let auth: Auth;

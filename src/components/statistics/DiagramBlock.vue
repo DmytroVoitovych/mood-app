@@ -30,7 +30,8 @@
 import { useMediaQuery, useResizeObserver } from "@vueuse/core";
 import { computed, ref, useTemplateRef } from "vue";
 import { SleepIco } from "~/assets/iconImport";
-import { createDateList } from "./helpers";
+import { createDateList } from "../../core/utils/helpers";
+import MoodBar from "../mood/MoodBar.vue";
 
 const HOURS_ARR: readonly string[] = [
   "9+ hours",
