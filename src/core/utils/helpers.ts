@@ -1,4 +1,4 @@
-import { MoodForm } from "~/composables/globalMoodState";
+import { MoodForm } from "../types/types";
 
 export const getCurrentDate = () =>
   new Date().toLocaleDateString("en-US", {
@@ -16,15 +16,16 @@ export const createDateList = (days: number): readonly Record<string, string>[] 
     month: "long",
     day: "numeric",
   };
-  const getdayAgo = (num: number) => new Date().getTime() - 24 * 60 * 60 * +`${num}000`;
+
+  const getDayAgo = (num: number) => new Date().getTime() - num * 24 * 60 * 60 * 1000;
 
   const dateList: Record<string, string>[] = [];
 
   for (let i = days - 1; i >= 0; --i) {
     const date = i
       ? {
-          [new Date(getdayAgo(i)).toLocaleDateString("en-US", option)]: new Date(
-            getdayAgo(i),
+          [new Date(getDayAgo(i)).toLocaleDateString("en-US", option)]: new Date(
+            getDayAgo(i),
           ).toLocaleDateString("en-US", optionForFullData),
         }
       : {

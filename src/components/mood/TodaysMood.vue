@@ -1,9 +1,9 @@
 <template>
   <div class="todaysMood">
-    <h4 class="todaysMood__title text-preset-2">
+    <h2 class="todaysMood__title text-preset-2">
       <el-text class="text-preset-3">I’m feeling</el-text>
       {{ currentMood?.text }}
-    </h4>
+    </h2>
     <component class="todaysMood__emoji" :is="currentMood?.imgSvg"></component>
     <i class="todaysMood__moto text-preset-6-italic">"{{ randomQuote }}"</i>
   </div>
