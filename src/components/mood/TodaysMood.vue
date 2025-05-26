@@ -1,11 +1,11 @@
 <template>
   <div class="todaysMood">
     <h2 class="todaysMood__title text-preset-2">
-      <el-text class="text-preset-3">I’m feeling</el-text>
+      <el-text class="text-preset-3">I'm feeling</el-text>
       {{ currentMood?.text }}
     </h2>
     <component class="todaysMood__emoji" :is="currentMood?.imgSvg"></component>
-    <i class="todaysMood__moto text-preset-6-italic">"{{ randomQuote }}"</i>
+    <i class="todaysMood__moto text-preset-6-italic">"{{ selectedQuote }}"</i>
   </div>
 </template>
 
@@ -13,12 +13,13 @@
 import { HappyIco, NeutralIco, SadIco, VeryHappyIco, VerySadIco } from "~/assets/iconImport";
 import { useGlobalProfileState } from "~/composables/globalProfileState";
 import { getCurrentDate } from "../../core/utils/helpers";
-import { computed } from "vue";
+import { computed, ref, watch } from "vue";
 import { MoodForm } from "~/core/types/types";
 import moto from "~/staticData/moodQuotes.json";
 
 const state = useGlobalProfileState();
 const date = getCurrentDate();
+const selectedQuote = ref("");
 
 const mood = [
   { value: 2, text: "Very Happy", imgSvg: VeryHappyIco },
@@ -44,13 +45,15 @@ const currentMood = computed(() => {
 const randomInteger = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1) + min);
 
-const randomQuote = computed(() => {
-  const quotes =
-    moto.moodQuotes[currentMood.value.value.toString() as keyof typeof moto.moodQuotes];
-  const num = randomInteger(0, quotes.length - 1);
-
-  return quotes[num];
-});
+watch(
+  currentMood,
+  (newMood) => {
+    const quotes = moto.moodQuotes[newMood.value.toString() as keyof typeof moto.moodQuotes];
+    const num = randomInteger(0, quotes.length - 1);
+    selectedQuote.value = quotes[num];
+  },
+  { immediate: true },
+);
 </script>
 <style lang="scss" scoped>
 .todaysMood {
