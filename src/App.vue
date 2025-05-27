@@ -28,19 +28,12 @@ onMounted(() => {
 });
 
 watch(
-  () => ({
-    logData: state.value.logData,
-    isAboard: state.value.isAboard,
-    profileName: state.value.profileName,
-    email: state.value.email,
-    avatar: state.value.avatar,
-  }),
+  () => state.value,
   (newState, oldState) => {
     if (JSON.stringify(newState) !== JSON.stringify(oldState) && auth.currentUser) {
       syncData(state, auth.currentUser);
     }
   },
-  { deep: true },
 );
 </script>
 <style></style>
